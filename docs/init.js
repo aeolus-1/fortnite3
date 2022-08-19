@@ -1,7 +1,7 @@
 
 
 
-var player1 = new mob(v(-500,0), badBuilds[(prompt("build") || "sniper")]),
+var player1 = new mob(v(-500,0), badBuilds[(prompt(Object.keys(badBuilds)) || "sniper")]),
     player2 = new mob(v(50,0), builds.starter)
 
 player1.player = true
@@ -16,4 +16,4 @@ players.push(player2)
 
 
 
-genMobs(10)
+genMobs(200)

@@ -1,6 +1,6 @@
 function genMobs(num) {
     for (let i = 0; i < num; i++) {
-    var range = 150
+    var range = 15000
         var rndPos = v(randInt(-range, range),randInt(-range, range))
         let pos = mainChunks.posToChunkPos(rndPos),
             chunkM = mainChunks.requestChunk(pos.x, pos.y)

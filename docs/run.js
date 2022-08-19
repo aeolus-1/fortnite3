@@ -82,7 +82,7 @@ function updateFps() {
     preTime = time
 
 
-    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*0.3
+    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*0.6
 }
 
 function mainloop() {
