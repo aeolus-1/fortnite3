@@ -104,11 +104,11 @@ function runCamera(ctx) {
     }
     ctx.lineWidth = 0.5
     ctx.strokeStyle = "#696969"
-    drawGrid(mainChunks.options.width*0.2)
+    drawGrid(mainChunks.options.width)
 
     ctx.lineWidth = 2
     ctx.strokeStyle = "#0f0"
-    drawGrid(mainChunks.options.width)
+    //drawGrid(mainChunks.options.width*mainChunks.options.rows)
     
     
 }

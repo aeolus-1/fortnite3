@@ -1,14 +1,17 @@
+var loadedMobs = new Array()
 function runMobs() {
 
-    let loadedMobs = new Array()
+    loadedMobs = new Array()
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
         let playerPos = v(player.chunkPos.x-2, player.chunkPos.y-2)
 
         let chunks = mainChunks.requestChunks(playerPos.x, playerPos.y, 5, 5)
+        
         let mobs = mainChunks.getMobiles(chunks)
         loadedMobs = [...loadedMobs, ...mobs]
     }
+    
     for (let i = 0; i < loadedMobs.length; i++) {
         let mob = loadedMobs[i];
         Mob.update(mob)

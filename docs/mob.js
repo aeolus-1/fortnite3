@@ -217,12 +217,13 @@ var Mob = {
         mob.chunkPos = mainChunks.posToChunkPos(mob.pos)
 
 
-
+        console.log(mob.chunkPos)
         let newChunk = mainChunks.requestChunk(mob.chunkPos.x, mob.chunkPos.y)
 
 
         if ((preChunk && mob.chunk) && preChunk.id != newChunk.id) {
             mob.chunk = newChunk
+            
 
             mainChunks.removeMob(preChunk.pos.x, preChunk.pos.y, mob)
             mainChunks.insertMob(mob.chunk.pos.x, mob.chunk.pos.y, mob)

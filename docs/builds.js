@@ -204,20 +204,6 @@ var badBuilds = {
                 recoilMod: 20,
                 rmb: true,
                 bullet: {
-                    pos: {
-                        x: 0,
-                        y: 0
-                    },
-                    vel: {
-                        x: 0,
-                        y: 0
-                    },
-                    rotation: 0,
-                    target: {
-                        x: 0,
-                        y: 0
-                    },
-                    alive: true,
                     build: {
                         health: 0.1,
                         speed: 3,
