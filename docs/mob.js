@@ -41,6 +41,10 @@ class mob {
 
         this.drones = []
 
+        this.invisA = this.build.invisDur
+        this.alpha = 1
+
+        this.effects = {}
 
 
     }
@@ -68,6 +72,36 @@ var Mob = {
             if (gun.shootCooldown > 0) gun.shootCooldown -= 1 * 3 * deltaTime
         }
 
+
+
+        var d = getDistance(v(0,0), mob.vel)
+        
+
+        if (mob.build.invisDur != 0) {
+            mob.invisA += (d*5)
+
+            mob.invisA = clamp(mob.invisA-1, 0, mob.build.invisDur)
+            mob.alpha = mob.invisA/mob.build.invisDur
+        }
+        var keys = Object.keys(mob.effects)
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i],
+                effect = mob.effects[key]
+
+            effect.duration -= 1 * deltaTime
+            if (effect.duration < 0) {
+                delete mob.effects[key]
+            } else {
+                mob.build.health -= effect.damage*2
+            }
+        }
+
+
+
+
+
+
+
         if (mob.build.duration > 0 && mob.build.duration != undefined) {
 
             if (mob.build.duration != Infinity && !mob.player) {
@@ -89,6 +123,9 @@ var Mob = {
             mob.vel.y += Math.sin(a)*mob.build.speed*0.05
 
         }
+
+        
+        
 
         
 
@@ -142,15 +179,38 @@ var Mob = {
                     mob2.build.teamPenetration * mob1.build.teamPenetration:
                     mob2.build.penetration * mob1.build.penetration)
 
+                    var a = ((mob1.team == mob2.team)?
+                    mob1.build.teamAffects:
+                    mob1.build.affects)
+
+                    for (let i = 0; i < a.length; i++) {
+                        Mob.applyAffect(mob2, a[i])
+                        
+                    }
 
                     mob2.vel.x += (Math.cos(angle) * strength * (mob1.build.size/10)) * deltaTime * 0.15 * p
                     mob2.vel.y += (Math.sin(angle) * strength * (mob1.build.size/10)) * deltaTime * 0.15 * p
+
+                    
 
                     if (mob1.team != mob2.team) {mob2.build.health -= mob1.build.bodyDamage * deltaTime}
                     
             
         }
     },
+
+    applyAffect(mobM, affect) {
+        var a = testObjectForUndefined(affect, defaultAffectProps),
+            e = mobM.effects,
+            id = a.id
+        
+        if (affect.stacks) {
+            id = id + `${newId()}`
+        }
+        e[id] = {...a}
+        console.log(e, id)
+    },
+
     move(mob, pos) {
         let preChunk = {...mob.chunk}
         mob.pos = pos
@@ -170,7 +230,8 @@ var Mob = {
     },
     render(mob, ctx) {
 
-        
+        ctx.save()
+        ctx.globalAlpha = mob.alpha
 
         for (let i = 0; i < mob.build.guns.length; i++) {
             let gun = mob.build.guns[i];
@@ -213,7 +274,7 @@ var Mob = {
         }
             
 
-
+ctx.restore()
     },
     runAi(mob) {
         if (mob.bot.active) {

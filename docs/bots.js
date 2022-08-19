@@ -20,6 +20,7 @@ var bots = {
             if (newPos == null) newPos = mob.closestEnemy.pos
 
             mob.rotation = getAngle(newPos, mob.pos)
+            mob.target = v(0,0)
             Tank.shoot(mob)
         } else if (mob.closestFriend) {
             let averagePos = v(0,0)

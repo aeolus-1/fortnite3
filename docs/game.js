@@ -1,6 +1,6 @@
 function genMobs(num) {
     for (let i = 0; i < num; i++) {
-    var range = 1500
+    var range = 150
         var rndPos = v(randInt(-range, range),randInt(-range, range))
         let pos = mainChunks.posToChunkPos(rndPos),
             chunkM = mainChunks.requestChunk(pos.x, pos.y)
@@ -48,6 +48,7 @@ var buildDefaultProps = {
     durSeperation:0,
     damageMod:1,
     affects:[],
+    teamAffects:[],
     static:false,
     baseValue:1,
 
@@ -110,6 +111,21 @@ var gunDefaultProps = {
 
     rmb:false,
 
+}
+
+var defaultAffectProps = {
+    speed: 1,
+    slow: 1,
+    damage: 0,
+    heal: 0,
+    duration: 1000,
+    shield: 1,
+    weaken: 1,
+    freeze: 1,
+    stun: false,
+    id: 1,
+    stacks: false,
+    targetsEnemy: true,
 }
 
 function testObjectForUndefined(ob, props) {

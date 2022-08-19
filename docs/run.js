@@ -34,7 +34,7 @@ function runMobs() {
 
                     if (mob.id != mob2.id) {
 
-                        if (mob2.player) {
+                        if (mob2.player && mob2.alpha > 0.2) {
                             let dst = getDistance(mob.pos, mob2.pos)
                             if (dst < cEnemy.dst) {
                                 cEnemy.mob = mob2
@@ -82,7 +82,7 @@ function updateFps() {
     preTime = time
 
 
-    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*1
+    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*0.3
 }
 
 function mainloop() {

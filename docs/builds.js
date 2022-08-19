@@ -15,11 +15,15 @@ var effects = {
     
     */
     immuneShield: {
+        id:"immuneShield",
+
         shield: 0,
         duration: 500,
         targetsEnemy: true,
     },
     speedSpeed: {
+        id:"speedSpeed",
+
         speed: 1.2,
         duration:1500,
         targetsEnemy:false,
@@ -27,6 +31,7 @@ var effects = {
     },
 
     toxicPosion: {
+        id:"toxicPosion",
 
         damage: 0.0075,
         duration: 1750,
@@ -35,15 +40,19 @@ var effects = {
 
     },
     injectionPosion: {
+        id:"injectionPosion",
 
-        damage: 0.004,
-        duration: 500,
+
+        damage: 0.0004,
+        duration: 400,
         stacks: true,
         targetsEnemy: true,
 
 
     },
     healsHeal: {
+        id:"healsHeal",
+        
 
         heal: 0.0075,
 
@@ -51,6 +60,8 @@ var effects = {
         targetsEnemy: false,
     },
     healsShield: {
+        id:"healsShield",
+
 
         shield: 0.2,
 
@@ -58,6 +69,8 @@ var effects = {
         targetsEnemy: false,
     },
     boosterSlow: {
+        id:"boosterSlow",
+
 
         slow: 0.8,
 
@@ -66,6 +79,8 @@ var effects = {
 
     },
     spreadSlow: {
+        id:"spreadSlow",
+
         slow: 0.8,
 
         duration: 1000,
@@ -73,6 +88,8 @@ var effects = {
 
     },
     tankWeaken: {
+        id:"tankWeaken",
+
 
         weaken: 0.75,
         duration: 1800,
@@ -80,12 +97,16 @@ var effects = {
 
     },
     carrionFreeze: {
+        id:"carrionFreeze",
+
         freeze: 1.5,
         duration: 1000,
         targetsEnemy: true,
 
     },
     shockyStun: {
+        id:"shockyStun",
+
         stun: true,
         duration: 200,
         targetsEnemy: true,
@@ -708,6 +729,8 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         drone: true,
+                        teamPenetration:0.5,
+
                         CONFIG: {
                             showHealthBar: false
                         }
@@ -756,6 +779,7 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         drone: true,
+                        teamPenetration:0.5,
                         CONFIG: {
                             showHealthBar: false
                         }

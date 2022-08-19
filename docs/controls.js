@@ -53,6 +53,8 @@ function runKeys() {
             
             player.vel.x += Math.cos(angle) * 0.2 * player.build.speed
             player.vel.y += Math.sin(angle) * 0.2 * player.build.speed
+
+            
         }
     }
 
