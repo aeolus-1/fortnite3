@@ -17,6 +17,7 @@ class mob {
         this.team = team
 
         this.build = testObjectForUndefined(build, buildDefaultProps)
+        
 
         for (let i = 0; i < this.build.guns.length; i++) {
             this.build.guns[i] = testObjectForUndefined(this.build.guns[i], gunDefaultProps)
@@ -33,11 +34,13 @@ class mob {
             active:false,
 
             movingDirection:0,
+            movingStrength:1,
             moving:false,
         }
 
 
         this.build.maxHealth = this.build.health
+        
 
         this.drones = []
 
@@ -45,6 +48,10 @@ class mob {
         this.alpha = 1
 
         this.effects = {}
+        this.effectsConfig = {
+            speed:1,
+            reloadSpeed:1,
+        }
 
 
     }
@@ -59,7 +66,7 @@ var Mob = {
 
         mob.chunk = mainChunks.requestChunk(mob.chunkPos.x, mob.chunkPos.y)
 
-        this.move(mob, v(mob.pos.x+(mob.vel.x*deltaTime), mob.pos.y+(mob.vel.y*deltaTime)))
+        if (!mob.stunned) this.move(mob, v(mob.pos.x+(mob.vel.x*deltaTime), mob.pos.y+(mob.vel.y*deltaTime)))
 
         var f = 1-((1-mob.build.friction)*1.5)
 
@@ -75,14 +82,22 @@ var Mob = {
 
 
         var d = getDistance(v(0,0), mob.vel)
+
+        if (d < 0.2) {
+            //mob.build.health = clamp(mob.build.health*1.0025, 0, mob.build.maxHealth)
+        }
         
 
         if (mob.build.invisDur != 0) {
-            mob.invisA += (d*5)
+            mob.invisA += Math.pow(d, 5)/100
 
             mob.invisA = clamp(mob.invisA-1, 0, mob.build.invisDur)
             mob.alpha = mob.invisA/mob.build.invisDur
         }
+
+
+        mob.stunned = false
+
         var keys = Object.keys(mob.effects)
         for (let i = 0; i < keys.length; i++) {
             const key = keys[i],
@@ -92,8 +107,10 @@ var Mob = {
             if (effect.duration < 0) {
                 delete mob.effects[key]
             } else {
-                mob.build.health -= effect.damage*2
+                Mob.damage(mob, (effect.damage*2*deltaTime), effect.shotBy) 
+                if (effect.stun) mob.stunned = true
             }
+            
         }
 
 
@@ -124,11 +141,28 @@ var Mob = {
 
         }
 
+        if (mob.bot.active) {
+            Mob.moveMobiles(mob, mob.bot.movingDirection, mob.bot.movingStrength)
+        }
+
         
         
 
         
 
+    },
+    damage(mob, damage, shotBy) {
+        var h = mob.build.health
+            mob.build.health = clamp(mob.build.health - damage, 0, mob.build.maxHealth)
+        if (h>0 && mob.build.health <= 0) {
+                                                            if (mob.id == player1.id) {
+                Chat.submitMsg(`Died by ${shotBy.build.name.toUpperCase()}'s hands`)
+            }
+            if (shotBy.id == player1.id) {
+                Chat.submitMsg(`Killed ${mob.build.name.toUpperCase()}`)
+            }
+        }
+        
     },
     spawn(pos=v(0,0), mobM=new mob(v(0,0), builds.starter), chunkArray=mainChunks) {
         
@@ -139,7 +173,6 @@ var Mob = {
      },
      kill(mob) {
          if (mob.build.exploding && !mob.unload) {
-            console.log("boom")
             Mob.explode(mob)
 
          }
@@ -148,13 +181,10 @@ var Mob = {
          
         if (mob.build.exploding) {
             for (let i = 0; i < mob.build.exploding.strength; i++) {
-                let tbullet = new eMob(v(0,0), JSON.parse(JSON.stringify(mob.build.exploding.bullet.build)))
+                let tbullet = new eMob({...mob.pos}, JSON.parse(JSON.stringify(mob.build.exploding.bullet.build)))
 
 
-
-                tbullet.pos = {
-                    ...mob.pos
-                }
+               
                 tbullet.team = mob.team
                 tbullet.shotBy = mob.shotBy
                 tbullet.isBullet = true
@@ -182,9 +212,8 @@ var Mob = {
                     var a = ((mob1.team == mob2.team)?
                     mob1.build.teamAffects:
                     mob1.build.affects)
-
                     for (let i = 0; i < a.length; i++) {
-                        Mob.applyAffect(mob2, a[i])
+                        Mob.applyAffect(mob2, a[i], mob1.shotBy)
                         
                     }
 
@@ -193,13 +222,17 @@ var Mob = {
 
                     
 
-                    if (mob1.team != mob2.team) {mob2.build.health -= mob1.build.bodyDamage * deltaTime}
+                    if (mob1.team != mob2.team) {
+                        Mob.damage(mob2, mob1.build.bodyDamage * deltaTime, mob1.shotBy)
+
+                        mob2.invisA += Math.pow((mob1.build.bodyDamage * deltaTime), 5)
+                    
+                    }
                     
             
         }
     },
-
-    applyAffect(mobM, affect) {
+    applyAffect(mobM, affect, shotBy) {
         var a = testObjectForUndefined(affect, defaultAffectProps),
             e = mobM.effects,
             id = a.id
@@ -207,8 +240,7 @@ var Mob = {
         if (affect.stacks) {
             id = id + `${newId()}`
         }
-        e[id] = {...a}
-        console.log(e, id)
+        e[id] = {...a, shotBy:shotBy}
     },
 
     move(mob, pos) {
@@ -217,7 +249,6 @@ var Mob = {
         mob.chunkPos = mainChunks.posToChunkPos(mob.pos)
 
 
-        console.log(mob.chunkPos)
         let newChunk = mainChunks.requestChunk(mob.chunkPos.x, mob.chunkPos.y)
 
 
@@ -231,8 +262,15 @@ var Mob = {
     },
     render(mob, ctx) {
 
+        
+
         ctx.save()
-        ctx.globalAlpha = mob.alpha
+
+        if (mob.stunned) {
+            ctx.translate(randInt(-4,4), randInt(-4,4))
+        }
+
+        ctx.globalAlpha = (mob.team==player1.team)?(mob.alpha+0.2)*0.8333333333:mob.alpha
 
         for (let i = 0; i < mob.build.guns.length; i++) {
             let gun = mob.build.guns[i];
@@ -288,63 +326,87 @@ ctx.restore()
             }
         }
 
+        if (mob.build.seeking) {
+            
+            if (mob.closestEnemy != undefined) {
+                var a = getAngle(mob.closestEnemy.pos, mob.pos)
+
+
+
+                mob.vel.x += Math.cos(a)*mob.build.speed*0.2*deltaTime
+                mob.vel.y += Math.sin(a)*mob.build.speed*0.2*deltaTime
+            }
+        }
+
         if (mob.build.autoShoot) {
             Tank.shoot(mob)
         }
+        if (mob.build.autoSpin) {
+            mob.rotation += 1.5*(Math.PI/180) * deltaTime
+        }
+    },
+
+    moveMobiles(mob, angle, strength) {
+        strength = clamp(strength, -1, 1)
+
+        mob.vel.x += Math.cos(angle)*mob.build.speed*0.2*deltaTime*strength
+        mob.vel.y += Math.sin(angle)*mob.build.speed*0.2*deltaTime*strength
     }
 }
 
 var Tank = {
     shoot(mobM, rmb=false) {
         
-        for (let i = 0; i < mobM.build.guns.length; i++) {
-            let gun = mobM.build.guns[i]
-            var d = [...mobM.shotBy.drones],
-                dl = d.length
-            for (let i = 0; i < dl; i++) {
-                const drone = d[i];
-                if (drone.unload) {
-                    mobM.shotBy.drones.splice(i, 1)
+        if (!mobM.stunned) {
+            for (let i = 0; i < mobM.build.guns.length; i++) {
+                let gun = mobM.build.guns[i]
+                var d = [...mobM.shotBy.drones],
+                    dl = d.length
+                for (let i = 0; i < dl; i++) {
+                    const drone = d[i];
+                    if (drone.unload) {
+                        mobM.shotBy.drones.splice(i, 1)
+                    }
                 }
+                if (gun.shootCooldown <= 0 && gun.rmb == rmb && ((gun.bullet.build.drone)?(mobM.shotBy.drones.length<mobM.build.droneCap):true)) {
+                    let bulletPos = v(
+                        mobM.pos.x+(Math.cos(mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5)),
+                        mobM.pos.y+(Math.sin(mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5))
+                    )
+
+                    let bullet = new mob(bulletPos, JSON.parse(JSON.stringify(gun.bullet.build)), mobM.team)
+                        
+                    var randomMovement = (randInt(-gun.spread, gun.spread)/300)*Math.PI*2
+
+                        
+                    var angle = ((gun.pos+180)*(Math.PI/180))+mobM.rotation
+                    mobM.vel.x += Math.cos(angle)*gun.recoilMod*0.01
+                    mobM.vel.y += Math.sin(angle)*gun.recoilMod*0.01
+
+                    bullet.vel = v(
+                        Math.cos(randomMovement+mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5)*0.05*bullet.build.speed,
+                        Math.sin(randomMovement+mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5)*0.05*bullet.build.speed
+                    )
+                    bullet.vel.x += mobM.vel.x*0.15
+                    bullet.vel.y += mobM.vel.y*0.15
+
+                    bullet.rotation = mobM.rotation
+
+                    bullet.build.isBullet = true
+
+                    bullet.shotBy = mobM.shotBy
+
+                    Mob.spawn(bulletPos, bullet, mainChunks)
+                    
+                    gun.shootCooldown = gun.speed
+
+                    if (bullet.build.drone) {
+                        mobM.shotBy.drones.push(bullet)
+                    }
+
+                } 
+
             }
-            if (gun.shootCooldown <= 0 && gun.rmb == rmb && ((gun.bullet.build.drone)?(mobM.shotBy.drones.length<mobM.build.droneCap):true)) {
-                let bulletPos = v(
-                    mobM.pos.x+(Math.cos(mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5)),
-                    mobM.pos.y+(Math.sin(mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5))
-                )
-
-                let bullet = new mob(bulletPos, JSON.parse(JSON.stringify(gun.bullet.build)), mobM.team)
-                    
-                var randomMovement = (randInt(-gun.spread, gun.spread)/300)*Math.PI*2
-
-                    
-                var angle = ((gun.pos+180)*(Math.PI/180))+mobM.rotation
-                mobM.vel.x += Math.cos(angle)*gun.recoilMod*0.01
-                mobM.vel.y += Math.sin(angle)*gun.recoilMod*0.01
-
-                bullet.vel = v(
-                    Math.cos(randomMovement+mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5)*0.05*bullet.build.speed,
-                    Math.sin(randomMovement+mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5)*0.05*bullet.build.speed
-                )
-                bullet.vel.x += mobM.vel.x*0.15
-                bullet.vel.y += mobM.vel.y*0.15
-
-                bullet.rotation = mobM.rotation
-
-                bullet.build.isBullet = true
-
-                bullet.shotBy = mobM.shotBy
-
-                Mob.spawn(bulletPos, bullet, mainChunks)
-                
-                gun.shootCooldown = gun.speed
-
-                if (bullet.build.drone) {
-                    mobM.shotBy.drones.push(bullet)
-                }
-
-            } 
-
         }
 
     },

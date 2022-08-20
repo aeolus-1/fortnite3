@@ -15,7 +15,7 @@ function runMobs() {
     for (let i = 0; i < loadedMobs.length; i++) {
         let mob = loadedMobs[i];
         Mob.update(mob)
-        if (mob.build.name != "dummy" || true) {
+        if (true) {
             Mob.runAi(mob)
 
             mob.closestEnemy = undefined
@@ -31,27 +31,34 @@ function runMobs() {
 
 
                     const mob2 = loadedMobs[i2];
-                    if (mob.team == mob2.team) {
-                        mob.closestFriend.push(mob2)
-                    }
 
-                    if (mob.id != mob2.id) {
+                    var dst = getDistance(mob2.pos, mob.pos)
+                    if (dst < mob.build.sight) {
 
-                        if (mob2.player && mob2.alpha > 0.2) {
-                            let dst = getDistance(mob.pos, mob2.pos)
-                            if (dst < cEnemy.dst) {
-                                cEnemy.mob = mob2
-                                cEnemy.dst = dst
+                        if (mob.team == mob2.team && mob2.player) {
+                            mob.closestFriend.push(mob2)
+                        }
+
+                        if (mob.id != mob2.id) {
+                            if (mob.team != mob2.team) {
+
+                                if (mob2.player && mob2.alpha > 0.2) {
+                                    let dst = getDistance(mob.pos, mob2.pos)
+                                    if (dst < cEnemy.dst) {
+                                        cEnemy.mob = mob2
+                                        cEnemy.dst = dst
+                                    }
+                                    mob.closestEnemy = cEnemy.mob
+                                }
                             }
-                            mob.closestEnemy = cEnemy.mob
-                        }
 
-                        if (true) {
-                            Mob.runCollisions(mob, mob2)
-                            Mob.runCollisions(mob2, mob)
+                            if (true) {
+                                Mob.runCollisions(mob, mob2)
+                                Mob.runCollisions(mob2, mob)
+                            }
                         }
-                    }
                     
+                    }
 
 
                 }
@@ -85,7 +92,7 @@ function updateFps() {
     preTime = time
 
 
-    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*0.6
+    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.5
 }
 
 function mainloop() {

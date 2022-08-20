@@ -1,6 +1,6 @@
-function genMobs(num) {
+function genMobs(num, range=10000) {
     for (let i = 0; i < num; i++) {
-    var range = 15000
+    var range = range
         var rndPos = v(randInt(-range, range),randInt(-range, range))
         let pos = mainChunks.posToChunkPos(rndPos),
             chunkM = mainChunks.requestChunk(pos.x, pos.y)
@@ -41,6 +41,7 @@ var buildDefaultProps = {
     guns:[],
     friction:0.9,
     sight:600,
+    range:500,
     drones:[],
     droneCap:6,
     replacesDrones:false,

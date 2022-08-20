@@ -43,7 +43,7 @@ var effects = {
         id:"injectionPosion",
 
 
-        damage: 0.0004,
+        damage: 0.004,
         duration: 400,
         stacks: true,
         targetsEnemy: true,
@@ -54,9 +54,9 @@ var effects = {
         id:"healsHeal",
         
 
-        heal: 0.0075,
+        damage: -0.4,
 
-        duration: 900,
+        duration: 10,
         targetsEnemy: false,
     },
     healsShield: {
@@ -125,7 +125,7 @@ var builds = {
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         range:100,
         guns: [
@@ -184,6 +184,7 @@ var builds = {
 
 var badBuilds = {
     port_a_fort: {
+        name:"port_a_fort",
         health: 60,
         speed: 0.7,
         size: 20,
@@ -369,13 +370,14 @@ var badBuilds = {
         }
     },
     flameThrower: {
+        name:"flameThrower",
         health: 100,
         speed: 0.83,
         size: 15,
         maxHealth: 200,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         range: 100,
         guns: [
@@ -434,6 +436,7 @@ var badBuilds = {
         }
     },
     starter: {
+        name:"starter",
         health: 130,
         speed: 0.9,
         size: 15,
@@ -495,13 +498,14 @@ var badBuilds = {
         }
     },
     destroyer: {
+        name:"destroyer",
         health: 350,
         speed: 0.93,
         size: 20,
         maxHealth: 250,
         bodyDamage: 5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         range: 0,
         guns: [
@@ -513,13 +517,14 @@ var badBuilds = {
 
     },
     drone: {
+        name:"drone",
         health: 90,
         speed: 0.8,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 1000,
         droneCap:10,
         guns: [
@@ -668,17 +673,18 @@ var badBuilds = {
 
     },
     manager: {
+        name:"manager",
         health: 60,
         speed: 0.75,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 1500,
         range:1500,
         droneCap:5,
-        invisDur:200,
+        invisDur:500,
         guns: [
             {
                 pos: 90,
@@ -788,13 +794,14 @@ var badBuilds = {
 
     },
     overseer: {
+        name:"overseer",
         health: 100,
         speed: 0.8,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         droneCap: 24,
         damageMod: 5,
@@ -829,7 +836,7 @@ var badBuilds = {
                         maxHealth: 6,
                         bodyDamage: 0.05,
                         duration: 100,
-                        friction: 0.995,
+                        friction: 0.985,
                         baseValue: 0,
                         sight: 0,
                         guns: [],
@@ -857,13 +864,14 @@ var badBuilds = {
 
     },
     octo: {
+        name:"octo",
         health: 130,
         speed: 0.65,
         size: 15,
         maxHealth: 120,
         bodyDamage: 0.9,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         damageMod: 0.85,
         droneCap: Infinity,
@@ -894,14 +902,15 @@ var badBuilds = {
                     build: {
                         health: 1,
                         speed: 3,
-                        size: 3,
+                        size: 4,
                         maxHealth: 3,
-                        bodyDamage: 0.2,
+                        bodyDamage: 0.7,
                         duration: 200,
                         friction: 0.95,
                         baseValue: 0,
                         sight: 0,
-                        seeking: true,
+                        drone: true,
+                        teamPenetration:0,
                         guns: [],
                         CONFIG: {
                             showHealthBar: false
@@ -943,153 +952,13 @@ var badBuilds = {
                         speed: 3,
                         size: 3,
                         maxHealth: 3,
-                        bodyDamage: 0.2,
+                        bodyDamage: 0.7,
                         duration: 200,
                         friction: 0.95,
                         baseValue: 0,
                         sight: 0,
-                        seeking: true,
-                        guns: [],
-                        CONFIG: {
-                            showHealthBar: false
-                        }
-                    },
-                    autoSpin: false,
-                    autoShoot: false,
-                    bot: false
-
-                },
-                recoilVel: 0,
-                shootCooldown: 0
-            },
-            {
-                pos: 240,
-                height: 5,
-                ogLength: 0,
-                width: 8,
-                speed: 40,
-                spread: 3,
-                recoilMod: 1,
-                bullet: {
-                    pos: {
-                        x: 0,
-                        y: 0
-                    },
-                    vel: {
-                        x: 0,
-                        y: 0
-                    },
-                    rotation: 0,
-                    target: {
-                        x: 0,
-                        y: 0
-                    },
-                    alive: true,
-                    build: {
-                        health: 1,
-                        speed: 3,
-                        size: 3,
-                        maxHealth: 3,
-                        bodyDamage: 0.2,
-                        duration: 200,
-                        friction: 0.95,
-                        baseValue: 0,
-                        sight: 0,
-                        seeking: true,
-                        guns: [],
-                        CONFIG: {
-                            showHealthBar: false
-                        }
-                    },
-                    autoSpin: false,
-                    autoShoot: false,
-                    bot: false
-
-                },
-                recoilVel: 0,
-                shootCooldown: 0
-            },
-            {
-                pos: 180,
-                height: 5,
-                ogLength: 0,
-                width: 8,
-                speed: 40,
-                spread: 3,
-                recoilMod: 1,
-                bullet: {
-                    pos: {
-                        x: 0,
-                        y: 0
-                    },
-                    vel: {
-                        x: 0,
-                        y: 0
-                    },
-                    rotation: 0,
-                    target: {
-                        x: 0,
-                        y: 0
-                    },
-                    alive: true,
-                    build: {
-                        health: 1,
-                        speed: 3,
-                        size: 3,
-                        maxHealth: 3,
-                        bodyDamage: 0.2,
-                        duration: 80,
-                        friction: 0.95,
-                        baseValue: 0,
-                        sight: 0,
                         drone: true,
-                        guns: [],
-                        CONFIG: {
-                            showHealthBar: false
-                        }
-                    },
-                    autoSpin: false,
-                    autoShoot: false,
-                    bot: false
-
-                },
-                recoilVel: 0,
-                shootCooldown: 0
-            },
-            {
-                pos: 120,
-                height: 5,
-                ogLength: 0,
-                width: 8,
-                speed: 40,
-                spread: 3,
-                recoilMod: 1,
-                bullet: {
-                    pos: {
-                        x: 0,
-                        y: 0
-                    },
-                    vel: {
-                        x: 0,
-                        y: 0
-                    },
-                    rotation: 0,
-                    target: {
-                        x: 0,
-                        y: 0
-                    },
-                    alive: true,
-                    build: {
-                        health: 1,
-                        speed: 3,
-                        size: 3,
-                        maxHealth: 3,
-                        bodyDamage: 0.2,
-                        duration: 80,
-                        friction: 0.95,
-                        baseValue: 0,
-                        sight: 0,
-                        drone: true,
+                        teamPenetration:0,
                         guns: [],
                         CONFIG: {
                             showHealthBar: false
@@ -1131,12 +1000,13 @@ var badBuilds = {
                         speed: 3,
                         size: 3,
                         maxHealth: 3,
-                        bodyDamage: 0.2,
-                        duration: 80,
+                        bodyDamage: 0.7,
+                        duration: 200,
                         friction: 0.95,
                         baseValue: 0,
                         sight: 0,
                         drone: true,
+                        teamPenetration:0,
                         guns: [],
                         CONFIG: {
                             showHealthBar: false
@@ -1150,6 +1020,107 @@ var badBuilds = {
                 recoilVel: 0,
                 shootCooldown: 0
             },
+            {
+                pos: 180,
+                height: 5,
+                ogLength: 0,
+                width: 18,
+                speed: 500,
+                spread: 3,
+                recoilMod: 1,
+                rmb:true,
+                bullet: {
+                    pos: {
+                        x: 0,
+                        y: 0
+                    },
+                    vel: {
+                        x: 0,
+                        y: 0
+                    },
+                    rotation: 0,
+                    target: {
+                        x: 0,
+                        y: 0
+                    },
+                    alive: true,
+                    build: {
+                        health: 1,
+                        speed: 3,
+                        size: 14,
+                        maxHealth: 3,
+                        bodyDamage: 0.2,
+                        duration: 500,
+                        friction: 0.95,
+                        baseValue: 0,
+                        sight: 0,
+                        autoShoot:true,
+                        autoSpin:true,
+                        
+                        guns: [
+                            {
+                                pos: 180,
+                                height: 5,
+                                ogLength: 0,
+                                width: 18,
+                                speed: 30,
+                                spread: 3,
+                                recoilMod: 1,
+                                bullet: {
+                                    pos: {
+                                        x: 0,
+                                        y: 0
+                                    },
+                                    vel: {
+                                        x: 0,
+                                        y: 0
+                                    },
+                                    rotation: 0,
+                                    target: {
+                                        x: 0,
+                                        y: 0
+                                    },
+                                    alive: true,
+                                    build: {
+                                        health: 1,
+                                        speed: 3,
+                                        size: 8,
+                                        maxHealth: 3,
+                                        bodyDamage: 0.2,
+                                        duration: 500,
+                                        friction: 0.94,
+                                        baseValue: 0,
+                                        sight: 1000,
+
+                                        seeking:true,
+                                        
+                                        guns: [],
+                                        CONFIG: {
+                                            showHealthBar: false
+                                        }
+                                    },
+                                    autoSpin: false,
+                                    autoShoot: false,
+                                    bot: false
+                
+                                },
+                                recoilVel: 0,
+                                shootCooldown: 0
+                            },
+                        ],
+                        CONFIG: {
+                            showHealthBar: false
+                        }
+                    },
+                    autoSpin: false,
+                    autoShoot: false,
+                    bot: false
+
+                },
+                recoilVel: 0,
+                shootCooldown: 0
+            },
+            
 
 
 
@@ -1159,13 +1130,14 @@ var badBuilds = {
         }
     },
     gunner: {
+        name:"gunner",
         health: 100,
         speed: 1,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         guns: [
             {
@@ -1221,13 +1193,14 @@ var badBuilds = {
         }
     },
     flank: {
+        name:"flank",
         health: 100,
         speed: 1,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         guns: [
             {
@@ -1377,13 +1350,14 @@ var badBuilds = {
         }
     },
     spread: {
+        name:"spread",
         health: 130,
         speed: 0.805,
         size: 15,
         maxHealth: 150,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 500,
         range: 60,
         damageMod: 1,
@@ -1393,7 +1367,7 @@ var badBuilds = {
                 height: 15,
                 ogLength: 0,
                 width: 15,
-                speed: 350,
+                speed: 140,
                 spread: 1,
                 recoilMod: 1,
                 bullet: {
@@ -1441,7 +1415,7 @@ var badBuilds = {
                 height: 15,
                 ogLength: 0,
                 width: 15,
-                speed: 350,
+                speed: 140,
                 spread: 1,
                 recoilMod: 1,
                 bullet: {
@@ -1489,7 +1463,7 @@ var badBuilds = {
                 height: 15,
                 ogLength: 0,
                 width: 15,
-                speed: 350,
+                speed: 140,
                 spread: 1,
                 recoilMod: 1,
                 bullet: {
@@ -1537,7 +1511,7 @@ var badBuilds = {
                 height: 15,
                 ogLength: 0,
                 width: 15,
-                speed: 350,
+                speed: 140,
                 spread: 1,
                 recoilMod: 1,
                 bullet: {
@@ -1585,7 +1559,7 @@ var badBuilds = {
                 height: 15,
                 ogLength: 0,
                 width: 15,
-                speed: 350,
+                speed: 140,
                 spread: 1,
                 recoilMod: 1,
                 bullet: {
@@ -1634,13 +1608,14 @@ var badBuilds = {
         }
     },
     jumper: {
+        name:"jumper",
         health: 120,
         speed: 0.6,
         size: 15,
         maxHealth: 150,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 500,
         range: 60,
         damageMod: 1,
@@ -1940,13 +1915,14 @@ var badBuilds = {
         }
     },
     booster: {
-        health: 70,
+        name:"booster",
+        health: 100,
         speed: 0.85,
         size: 15,
         maxHealth: 120,
-        bodyDamage: 0.7,
+        bodyDamage: 0.9,
         duration: Infinity,
-        friction: 0.995,
+        friction: 0.985,
         sight: 600,
         range: 5,
         guns: [
@@ -2000,7 +1976,7 @@ var badBuilds = {
             },
             {
                 pos: 165,
-                height: 15,
+                height: 10,
                 ogLength: 0,
                 width: 10,
                 speed: 50,
@@ -2047,7 +2023,7 @@ var badBuilds = {
             },
             {
                 pos: 195,
-                height: 15,
+                height: 10,
                 ogLength: 0,
                 width: 10,
                 speed: 50,
@@ -2094,7 +2070,7 @@ var badBuilds = {
             },
             {
                 pos: 140,
-                height: 15,
+                height: 10,
                 ogLength: 0,
                 width: 10,
                 speed: 50,
@@ -2141,7 +2117,7 @@ var badBuilds = {
             },
             {
                 pos: 220,
-                height: 15,
+                height: 10,
                 ogLength: 0,
                 width: 10,
                 speed: 50,
@@ -2196,6 +2172,7 @@ var badBuilds = {
 
     },
     turretGunner: {
+        name:"turretGunner",
         health: 50,
         speed: 0,
         size: 25,
@@ -2261,13 +2238,14 @@ var badBuilds = {
         }
     },
     turret: {
+        name:"turret",
         health: 200,
         speed: 0.8,
         size: 15,
         maxHealth: 200,
         bodyDamage: 1.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         guns: [
             {
@@ -2415,13 +2393,14 @@ var badBuilds = {
         }
     },
     sniper: {
+        name:"sniper",
         health: 60,
         speed: 0.8,
         size: 15,
         maxHealth: 60,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 1250,
         guns: [
             {
@@ -2476,13 +2455,14 @@ var badBuilds = {
         }
     },
     rocketeer: {
+        name:"rocketeer",
         health: 60,
         speed: 0.75,
         size: 15,
         maxHealth: 60,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 1000,
         guns: [
             {
@@ -2625,20 +2605,21 @@ var badBuilds = {
         }
     },
     spiral: {
+        name:"spiral",
         health: 60,
         speed: 0.8,
         size: 15,
         maxHealth: 60,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 1000,
         guns: [
             {
                 pos: 0,
                 height: 30,
                 ogLength: 0,
-                width: 14,
+                width: 17,
                 speed: 500,
                 spread: 1,
                 recoilMod: 1,
@@ -2658,23 +2639,24 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        health: 10,
+                        health: 250,
                         speed: 1,
-                        size: 7,
+                        size: 13,
                         maxHealth: 10,
-                        bodyDamage: 1.5,
+                        bodyDamage: 2.5,
                         duration: 500,
-                        friction: 0.99,
+                        friction: 1,
                         baseValue: 0,
                         sight: 600,
-                        autoSpin: true,
+                        autoShoot: true,
+                        autoSpin:true,
                         guns: [
                             {
                                 pos: 0,
-                                height: 15,
+                                height: 8,
                                 ogLength: 0,
-                                width: 8,
-                                speed: 40,
+                                width: 12,
+                                speed: 25,
                                 spread: 3,
                                 recoilMod: 1,
                                 bullet: {
@@ -2694,7 +2676,7 @@ var badBuilds = {
                                     alive: true,
                                     build: {
                                         health: 5,
-                                        speed: 2.5,
+                                        speed: 5,
                                         size: 4,
                                         maxHealth: 10,
                                         bodyDamage: 1,
@@ -2718,10 +2700,10 @@ var badBuilds = {
                             },
                             {
                                 pos: 270,
-                                height: 15,
+                                height: 8,
                                 ogLength: 0,
-                                width: 8,
-                                speed: 40,
+                                width: 12,
+                                speed: 25,
                                 spread: 3,
                                 recoilMod: 1,
                                 bullet: {
@@ -2741,7 +2723,7 @@ var badBuilds = {
                                     alive: true,
                                     build: {
                                         health: 5,
-                                        speed: 2.5,
+                                        speed: 5,
                                         size: 4,
                                         maxHealth: 10,
                                         bodyDamage: 1,
@@ -2765,10 +2747,10 @@ var badBuilds = {
                             },
                             {
                                 pos: 180,
-                                height: 15,
+                                height: 8,
                                 ogLength: 0,
-                                width: 8,
-                                speed: 40,
+                                width: 12,
+                                speed: 25,
                                 spread: 3,
                                 recoilMod: 1,
                                 bullet: {
@@ -2788,7 +2770,7 @@ var badBuilds = {
                                     alive: true,
                                     build: {
                                         health: 5,
-                                        speed: 2.5,
+                                        speed: 5,
                                         size: 4,
                                         maxHealth: 10,
                                         bodyDamage: 1,
@@ -2812,10 +2794,10 @@ var badBuilds = {
                             },
                             {
                                 pos: 90,
-                                height: 15,
+                                height: 8,
                                 ogLength: 0,
-                                width: 8,
-                                speed: 40,
+                                width: 12,
+                                speed: 25,
                                 spread: 3,
                                 recoilMod: 1,
                                 bullet: {
@@ -2835,7 +2817,7 @@ var badBuilds = {
                                     alive: true,
                                     build: {
                                         health: 5,
-                                        speed: 2.5,
+                                        speed: 5,
                                         size: 4,
                                         maxHealth: 10,
                                         bodyDamage: 1,
@@ -2882,13 +2864,14 @@ var badBuilds = {
         }
     },
     tank: {
+        name:"tank",
         health: 100,
         speed: 0.8,
         size: 17,
         maxHealth: 100,
         bodyDamage: 0.4,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 800,
         guns: [
             {
@@ -2944,13 +2927,14 @@ var badBuilds = {
         }
     },
     bigTank: {
+        name:"bigTank",
         health: 100,
         speed: 0.8,
         size: 20,
         maxHealth: 100,
         bodyDamage: 0.4,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 800,
         guns: [
             {
@@ -3006,13 +2990,14 @@ var badBuilds = {
         }
     },
     seekerTank: {
+        name:"seekerTank",
         health: 100,
         speed: 0.8,
         size: 17,
         maxHealth: 100,
         bodyDamage: 0.4,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 800,
         guns: [
             {
@@ -3045,7 +3030,7 @@ var badBuilds = {
                         maxHealth: 20,
                         bodyDamage: 3,
                         duration: 450,
-                        friction: 0.99,
+                        friction: 0.98,
                         baseValue: 0,
                         sight: 0,
                         seeking: true,
@@ -3069,16 +3054,17 @@ var badBuilds = {
         }
     },
     mine: {
+        name:"mine",
         health: 90,
         speed: 0.8,
         size: 15,
         maxHealth: 60,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 700,
         range: 0,
-        droneCap:15,
+        droneCap:1,
         guns: [
             {
                 pos: 0,
@@ -3111,7 +3097,7 @@ var badBuilds = {
                         maxHealth: 3,
                         bodyDamage: 0,
                         duration: 150,
-                        friction: 0.99,
+                        friction: 0.98,
                         baseValue: 0,
                         sight: 0,
                         exploding: {
@@ -3173,7 +3159,7 @@ var badBuilds = {
                 height: 8,
                 ogLength: 0,
                 width: 17,
-                speed: 500,
+                speed: 800,
                 spread: 1,
                 recoilMod: 20,
                 rmb:true,
@@ -3193,17 +3179,15 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        invisDur: 900,
                         health: 1,
                         speed: 2,
                         size: 15,
                         maxHealth: 3,
                         bodyDamage: 0,
-                        duration: 99999999,
+                        duration: 250,
                         friction: 0.98,
                         baseValue: 0,
                         drone:true,
-                        droneNoMove:true,
                         sight: 0,
                         exploding: {
                             strength: 16,
@@ -3265,13 +3249,14 @@ var badBuilds = {
         }
     },
     heals: {
+        name:"heals",
         health: 100,
         speed: 0.95,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         guns: [
             {
@@ -3279,7 +3264,7 @@ var badBuilds = {
                 height: 15,
                 ogLength: 0,
                 width: 8,
-                speed: 50,
+                speed: 35,
                 spread: 7,
                 recoilMod: 1,
                 bullet: {
@@ -3299,17 +3284,17 @@ var badBuilds = {
                     alive: true,
                     build: {
                         health: 0.1,
-                        speed: 1.8,
-                        size: 3.5,
+                        speed: 2.8,
+                        size: 4,
                         maxHealth: 3,
-                        bodyDamage: -0.3,
+                        bodyDamage: 0,
                         duration: 200,
                         friction: 1,
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
                         guns: [],
-                        affects: [effects.healsHeal, effects.healsShield],
+                        teamAffects: [effects.healsHeal],
                         CONFIG: {
                             showHealthBar: false
                         }
@@ -3347,7 +3332,7 @@ var badBuilds = {
                     alive: true,
                     build: {
                         health: 5,
-                        speed: 4,
+                        speed: 6,
                         size: 7,
                         maxHealth: 3,
                         bodyDamage: 1.5,
@@ -3375,13 +3360,14 @@ var badBuilds = {
         }
     },
     toxic: {
+        name:"toxic",
         health: 120,
         speed: 0.9,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         guns: [
             {
@@ -3531,13 +3517,14 @@ var badBuilds = {
         }
     },
     injection: {
+        name:"injection",
         health: 90,
         speed: 0.9,
         size: 15,
         maxHealth: 60,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 1200,
         guns: [
             {
@@ -3545,7 +3532,7 @@ var badBuilds = {
                 height: 30,
                 ogLength: 0,
                 width: 12,
-                speed: 450,
+                speed: 250,
                 spread: 0,
                 recoilMod: 1,
                 bullet: {
@@ -3593,13 +3580,14 @@ var badBuilds = {
         }
     },
     carrion: {
+        name:"carrion",
         health: 100,
         speed: 0.9,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 600,
         guns: [
             {
@@ -3749,13 +3737,14 @@ var badBuilds = {
         }
     },
     shocky: {
+        name:"shocky",
         health: 130,
         speed: 0.85,
         size: 15,
         maxHealth: 150,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 500,
         range: 60,
         damageMod: 1,
@@ -3765,7 +3754,7 @@ var badBuilds = {
                 height: 15,
                 ogLength: 0,
                 width: 15,
-                speed: 50,
+                speed: 40,
                 spread: 1,
                 recoilMod: 1,
                 bullet: {
@@ -3833,7 +3822,7 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        health: 100,
+                        health: 1000,
                         speed: 5.5,
                         size: 8,
                         maxHealth: 3,
@@ -3843,6 +3832,7 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
+                        penetration:0,
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
@@ -3882,7 +3872,7 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        health: 100,
+                        health: 1000,
                         speed: 5.5,
                         size: 8,
                         maxHealth: 3,
@@ -3892,6 +3882,8 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
+                        penetration:0,
+
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
@@ -3931,7 +3923,7 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        health: 100,
+                        health: 1000,
                         speed: 5.5,
                         size: 8,
                         maxHealth: 3,
@@ -3941,6 +3933,8 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
+                        penetration:0,
+
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
@@ -3980,7 +3974,7 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        health: 100,
+                        health: 1000,
                         speed: 5.5,
                         size: 8,
                         maxHealth: 3,
@@ -3990,6 +3984,8 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
+                        penetration:0,
+
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
@@ -4029,7 +4025,7 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        health: 100,
+                        health: 1000,
                         speed: 5.5,
                         size: 8,
                         maxHealth: 3,
@@ -4039,6 +4035,8 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
+                        penetration:0,
+
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
@@ -4061,6 +4059,7 @@ var badBuilds = {
         }
     },
     megaMine: {
+        name:"megaMine",
         health: 300,
         speed: 1.2,
         size: 17,
@@ -4068,7 +4067,7 @@ var badBuilds = {
         maxHealth: 110,
         bodyDamage: 8,
         duration: Infinity,
-        friction: 0.99,
+        friction: 0.98,
         sight: 800,
         range: 0,
         guns: [

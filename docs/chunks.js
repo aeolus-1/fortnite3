@@ -87,8 +87,8 @@ class Chunks {
         this.options = {
             rows: 5,
             columns: 5,
-            width: 80,
-            height: 80,
+            width: 120,
+            height: 120,
             xSet: 1,
             ySet: 1,
             ...options,

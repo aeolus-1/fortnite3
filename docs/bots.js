@@ -1,17 +1,24 @@
 var bots = {
+    classRammer(mob) {
+
+    },
     starter(mob) {
 
         if (mob.closestEnemy != undefined){
 
             let dst = getDistance(mob.pos, mob.closestEnemy.pos)
-            if (dst > mob.build.range) {
+            if (dst < mob.build.sight) {
                 mob.bot.moving = true
                 mob.bot.movingDirection = getAngle(mob.closestEnemy.pos, mob.pos)
-            } else {
-                mob.bot.moving = false
+            } 
+            var rangeDst = dst-mob.build.range
+            if (Math.abs(rangeDst)> 50) {
+                mob.bot.movingStrength = Math.sign(rangeDst)
+                console.log(Math.sign(rangeDst), rangeDst)
             }
-
-            let addedVel = v(mob.closestEnemy.vel.x-mob.vel.x, mob.closestEnemy.vel.y-mob.vel.y)
+            
+            var m = 1
+            let addedVel = v((mob.closestEnemy.vel.x+mob.vel.x)*m, (mob.closestEnemy.vel.y+mob.vel.y)*m)
             
             if (mob.build.guns[0] == undefined) console.log(mob.build)
             let bulletSpeed = mob.build.guns[0].bullet.build.speed
@@ -21,24 +28,38 @@ var bots = {
 
             mob.rotation = getAngle(newPos, mob.pos)
             mob.target = {...newPos}
-            Tank.shoot(mob)
-        } else if (mob.closestFriend) {
-            let averagePos = v(0,0)
-            for (let i = 0; i < mob.closestFriend.length; i++) {
-                const friend = mob.closestFriend[i];
-                averagePos.x += friend.pos.x
-                averagePos.y += friend.pos.y
+
+            if (dst < mob.build.range) {
+                Tank.shoot(mob)
+
             }
-            averagePos.x /= mob.closestFriend.length
-            averagePos.y /= mob.closestFriend.length
+            
+        } else if (mob.closestFriend) {
+            Bot.moveToAverage(mob)
+
+        }
+
+        
+    },
+
+
+    megaMine(mob) {
+
+        if (mob.closestEnemy != undefined){
+
+            let dst = getDistance(mob.pos, mob.closestEnemy.pos)
 
             mob.bot.moving = true
-            mob.bot.movingDirection = getAngle(averagePos, mob.pos)
+            mob.bot.movingDirection = getAngle(mob.closestEnemy.pos, mob.pos)
 
+            mob.bot.movingStrength = (dst<200)?1:0.05
+
+
+            
+        } else if (mob.closestFriend) {
+            Bot.moveToAverage(mob)
         }
 
-        if (mob.bot.moving) {
-            mob.vel = v(Math.cos(mob.bot.movingDirection), Math.sin(mob.bot.movingDirection))
-        }
+        
     }
 }

@@ -18,7 +18,27 @@ function quad(a, b, c) {
 }
 
 var Bot = {
+    moveToAverage(mob) {
+        mob.target = {...mob.pos}
+
+        let averagePos = v(0,0)
+        for (let i = 0; i < mob.closestFriend.length; i++) {
+            const friend = mob.closestFriend[i];
+            averagePos.x += friend.pos.x
+            averagePos.y += friend.pos.y
+        }
+        averagePos.x /= mob.closestFriend.length
+        averagePos.y /= mob.closestFriend.length
+
+        let dst = getDistance(mob.pos, averagePos)
+
+
+        mob.bot.moving = true
+        mob.bot.movingDirection = getAngle(averagePos, mob.pos)
+        
+    },
     leadMovingTarget(player, enemy, enemyVel, v) {
+        
         let tx = enemy.x - player.x;
         let ty = enemy.y - player.y;
         let tvx = enemyVel.x;

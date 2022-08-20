@@ -35,9 +35,12 @@ function renderLoop() {
 
     renderChunks(ctx)
     renderMobs()
+
     
 
     ctx.restore()
+    Chat.render(ctx)
+
 
     ctx.fillText(Math.round(framerate), 10, 10)
 }
