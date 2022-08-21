@@ -138,6 +138,7 @@ var Mob = {
 
         if (mob.build.drone && !mob.bot.active) {
             var a = getAngle(mob.shotBy.target, mob.pos);
+            Mob.setAngle(mob, a)
             mob.vel.x += Math.cos(a) * mob.build.speed * 0.05;
             mob.vel.y += Math.sin(a) * mob.build.speed * 0.05;
         }

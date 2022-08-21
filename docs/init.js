@@ -1,4 +1,14 @@
-var cbuild = (prompt(Object.keys(badBuilds)) || "gunner")
+var text = "Select Build:"
+for (let i = 0; i < Object.keys(badBuilds).length; i++) {
+    const key = Object.keys(badBuilds)[i];
+    text = text + `\n- ${key}`
+}
+
+var cbuild = (prompt(text))
+while (badBuilds[cbuild] == undefined) {
+    alert("not an build")
+    cbuild = (prompt(text))
+}
 var player1 = new mob(v(1500,150), badBuilds[cbuild])
     //player2 = new mob(v(2000,0), bossBuilds.mothership)
 
