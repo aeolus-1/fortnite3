@@ -1,8 +1,23 @@
-function v(x, y) {
+function v(x=0, y=0) {
     return {x:x,y:y}
 }
 
-
+function rotate(t, n, e) {
+    var r = e,
+      o = Math.cos(r),
+      u = Math.sin(r);
+    return {
+      x: o * (n.x - t.x) + u * (n.y - t.y) + t.x,
+      y: o * (n.y - t.y) - u * (n.x - t.x) + t.y,
+    };
+  }
+  function stopOverflow(t, n) {
+    return ((t % n) + n) % n;
+  }
+  function angleDiff(angle1, angle2) {
+    var diff = ( angle2 - angle1 + 180 ) % 360 - 180;
+    return diff < -180 ? diff + 360 : diff;
+  }
 var pSBC = (p, c0, c1, l) => {
     let r, g, b, P, f, t, h, i = parseInt,
         m = Math.round,

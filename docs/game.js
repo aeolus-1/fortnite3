@@ -25,7 +25,6 @@ function genMobs(num, range=10000, pos=v(0,0), team="#f00") {
 
 
         
-        mainChunks.insertMob(chunkM.pos.x, chunkM.pos.y, m)
     }
 }
 
@@ -54,6 +53,8 @@ var buildDefaultProps = {
     size:10,
     health:100,
     speed:0.9,
+    turningSpeed:1,
+
     size:15,
     bodyDamage:0.5,
     duration:300,
@@ -101,6 +102,8 @@ var gunDefaultProps = {
     recoilMod:1,
     offset:0,
     autoShoot:false,
+    auto:false,
+    rotation:0,
     bullet:{
         pos: {
             x: 0,

@@ -33,8 +33,8 @@ var effects = {
     toxicPosion: {
         id:"toxicPosion",
 
-        damage: 0.0075,
-        duration: 1750,
+        damage: 0.0225,
+        duration: 583,
         targetsEnemy: true,
 
 
@@ -1132,7 +1132,7 @@ var badBuilds = {
     gunner: {
         name:"gunner",
         health: 100,
-        speed: 1,
+        speed: 0.8,
         size: 15,
         maxHealth: 100,
         bodyDamage: 0.5,
@@ -1144,7 +1144,7 @@ var badBuilds = {
                 pos: 0,
                 height: 15,
                 ogLength: 0,
-                width: 8,
+                width: 12,
                 speed: 10,
                 spread: 6,
                 recoilMod: 1,
@@ -1165,7 +1165,7 @@ var badBuilds = {
                     alive: true,
                     build: {
                         health: 1,
-                        speed: 5,
+                        speed: 8,
                         size: 3,
                         maxHealth: 3,
                         bodyDamage: 0.5,
@@ -4028,6 +4028,210 @@ var badBuilds = {
         }
 
     },
+    auto: {
+        name:"auto",
+        health: 130,
+        speed: 0.9,
+        size: 15,
+        maxHealth: 100,
+        bodyDamage: 0.5,
+        duration: Infinity,
+        friction: 0.9,
+        sight: 600,
+        guns: [
+            {
+                pos: 0,
+                height: 25,
+                ogLength: 0,
+                width: 10,
+                speed: 200,
+                spread: 3,
+                recoilMod: 1,
+                auto:true,
+                bullet: {
+                    pos: {
+                        x: 0,
+                        y: 0
+                    },
+                    vel: {
+                        x: 0,
+                        y: 0
+                    },
+                    rotation: 0,
+                    target: {
+                        x: 0,
+                        y: 0
+                    },
+                    alive: true,
+                    build: {
+                        health: 9,
+                        speed: 8,
+                        size: 8,
+                        maxHealth: 3,
+                        bodyDamage: 3.5,
+                        duration: 300,
+                        friction: 1,
+                        baseValue: 0,
+                        sight: 0,
+                        guns: [],
+                        CONFIG: {
+                            showHealthBar: false
+                        }
+                    },
+                    autoSpin: false,
+                    autoShoot: false,
+                    bot: false
+
+                },
+                recoilVel: 0,
+                shootCooldown: 0
+            },
+            {
+                pos: 180,
+                height: 25,
+                ogLength: 0,
+                width: 10,
+                speed: 200,
+                spread: 3,
+                recoilMod: 1,
+                auto:true,
+                bullet: {
+                    pos: {
+                        x: 0,
+                        y: 0
+                    },
+                    vel: {
+                        x: 0,
+                        y: 0
+                    },
+                    rotation: 0,
+                    target: {
+                        x: 0,
+                        y: 0
+                    },
+                    alive: true,
+                    build: {
+                        health: 9,
+                        speed: 8,
+                        size: 8,
+                        maxHealth: 3,
+                        bodyDamage: 3.5,
+                        duration: 300,
+                        friction: 1,
+                        baseValue: 0,
+                        sight: 0,
+                        guns: [],
+                        CONFIG: {
+                            showHealthBar: false
+                        }
+                    },
+                    autoSpin: false,
+                    autoShoot: false,
+                    bot: false
+
+                },
+                recoilVel: 0,
+                shootCooldown: 0
+            },
+            {
+                pos: 90,
+                height: 25,
+                ogLength: 0,
+                width: 10,
+                speed: 200,
+                spread: 3,
+                recoilMod: 1,
+                auto:true,
+                bullet: {
+                    pos: {
+                        x: 0,
+                        y: 0
+                    },
+                    vel: {
+                        x: 0,
+                        y: 0
+                    },
+                    rotation: 0,
+                    target: {
+                        x: 0,
+                        y: 0
+                    },
+                    alive: true,
+                    build: {
+                        health: 9,
+                        speed: 8,
+                        size: 8,
+                        maxHealth: 3,
+                        bodyDamage: 3.5,
+                        duration: 300,
+                        friction: 1,
+                        baseValue: 0,
+                        sight: 0,
+                        guns: [],
+                        CONFIG: {
+                            showHealthBar: false
+                        }
+                    },
+                    autoSpin: false,
+                    autoShoot: false,
+                    bot: false
+
+                },
+                recoilVel: 0,
+                shootCooldown: 0
+            },
+            {
+                pos: 270,
+                height: 25,
+                ogLength: 0,
+                width: 10,
+                speed: 200,
+                spread: 3,
+                recoilMod: 1,
+                auto:true,
+                bullet: {
+                    pos: {
+                        x: 0,
+                        y: 0
+                    },
+                    vel: {
+                        x: 0,
+                        y: 0
+                    },
+                    rotation: 0,
+                    target: {
+                        x: 0,
+                        y: 0
+                    },
+                    alive: true,
+                    build: {
+                        health: 9,
+                        speed: 8,
+                        size: 8,
+                        maxHealth: 3,
+                        bodyDamage: 3.5,
+                        duration: 300,
+                        friction: 1,
+                        baseValue: 0,
+                        sight: 0,
+                        guns: [],
+                        CONFIG: {
+                            showHealthBar: false
+                        }
+                    },
+                    autoSpin: false,
+                    autoShoot: false,
+                    bot: false
+
+                },
+                recoilVel: 0,
+                shootCooldown: 0
+            },
+        ],
+        CONFIG: {
+            showHealthBar: true
+        }
+    },
     
 
 }
@@ -4040,7 +4244,7 @@ let mothershipDroneGun = {
     height: 25,
     width: 25,
     spread: 3,
-    speed:100,
+    speed:700,
     recoilMod: 1,
     autoShoot:true,
     bullet: {
@@ -4061,15 +4265,15 @@ let mothershipDroneGun = {
         build: {
             name:"Mothership Drone",
             health: 60,
-            speed: 0.8,
+            speed: 0.5,
             size: 10,
             shape:8,
             maxHealth: 100,
             bodyDamage: 0.5,
             duration: 5000,
             friction: 0.98,
-            sight: 400,
-            range:400,
+            sight: 1000,
+            range:800,
             bot:true,
             drone:true,
 
@@ -4135,21 +4339,71 @@ let mothershipDroneGun = {
     recoilVel: 0,
     shootCooldown: 0
 }
+let mothershipAutoGun = {
+    pos: 0,
+    height: 30,
+    ogLength: 0,
+    width: 10,
+    speed: 40,
+    spread: 3,
+    recoilMod: 1,
+    auto:true,
+    bullet: {
+        pos: {
+            x: 0,
+            y: 0
+        },
+        vel: {
+            x: 0,
+            y: 0
+        },
+        rotation: 0,
+        target: {
+            x: 0,
+            y: 0
+        },
+        alive: true,
+        build: {
+            health: 4,
+            speed: 8,
+            size: 6,
+            maxHealth: 3,
+            bodyDamage: 2,
+            duration: 300,
+            friction: 1,
+            baseValue: 0,
+            sight: 0,
+            guns: [],
+            CONFIG: {
+                showHealthBar: false
+            }
+        },
+        autoSpin: false,
+        autoShoot: true,
+        bot: false
+
+    },
+    recoilVel: 0,
+        autoShoot:true,
+
+    shootCooldown: 0
+}
 
 bossBuilds.mothership = {
         name:"mothership",
         boss:true,
         health: 4000,
-        speed: 0.6,
+        speed: 0.7,
         size: 60,
         shape:8,
         maxHealth: 100,
         bodyDamage: 0.9,
         duration: Infinity,
         friction: 0.98,
-        sight: 2000,
-        range:500,
-        droneCap:12,
+        sight: 1000,
+        range:200,
+        droneCap:7,
+        turningSpeed:0.03,
         guns: [
             {
                 pos: 0,
@@ -4178,7 +4432,7 @@ bossBuilds.mothership = {
                         health: 250,
                         speed: 6,
                         size: 30,
-                        bodyDamage: 7,
+                        bodyDamage: 3.5,
                         duration: 300,
                         friction: 1,
                         baseValue: 0,
@@ -4196,6 +4450,14 @@ bossBuilds.mothership = {
                 },
                 recoilVel: 0,
                 shootCooldown: 0
+            },
+            {
+                ...mothershipAutoGun,
+                pos:65,
+            },
+            {
+                ...mothershipAutoGun,
+                pos:-65,
             },
             {
                 ...mothershipDroneGun,
@@ -4216,7 +4478,8 @@ bossBuilds.mothership = {
                 ...mothershipDroneGun,
                 pos:180,
                 offset:-15
-            }
+            },
+            
         ],
         CONFIG: {
             showHealthBar: true

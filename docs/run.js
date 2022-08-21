@@ -25,6 +25,7 @@ function runMobs() {
 
                 mob.closestEnemy = undefined
                 mob.closestEnemyPlayer = undefined
+                mob.enemyPlayers = []
                 mob.closestFriend = new Array()
 
                 cEnemy = {mob:undefined, dst:Infinity}
@@ -49,6 +50,7 @@ function runMobs() {
                             if (mob.id != mob2.id) {
                                 if (mob.team != mob2.team) {
                                     if (mob2.alpha > 0.2) {
+                                        mob.enemyPlayers.push(mob2)
                                         if (mob2.player || mob2.bot.active) {
                                             let dst = getDistance(mob.pos, mob2.pos)
                                             if (dst < cEnemyPlayer.dst) {
@@ -121,8 +123,9 @@ function mainloop() {
         ((mouse.y)-((window.innerHeight/2)-(camera.y*globalScale)))/globalScale
     )
 
-
-    player1.rotation = getAngle(gameMouse, player1.pos)
+    var targetA = getAngle(gameMouse, player1.pos)/(Math.PI/180),
+        currentA = player1.rotation/(Math.PI/180)
+    player1.rotation -= clamp((angleDiff(targetA, currentA))*(Math.PI/180)*player1.build.turningSpeed, -1, 1)
 
     player1.target = {...gameMouse}
 

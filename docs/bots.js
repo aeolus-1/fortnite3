@@ -15,7 +15,7 @@ var bots = {
             if (Math.abs(rangeDst)> 50) {
                 mob.bot.movingStrength = Math.sign(rangeDst)
             }
-            if (mob.closestEnemy != undefined && false){
+            if (mob.closestEnemy != undefined){
                 if (mob.closestEnemy.id != mob.closestEnemyPlayer.id) {
                     var enDst = getDistance(mob.closestEnemy.pos, mob.pos)
                     if (enDst < 100) {
@@ -38,10 +38,10 @@ var bots = {
             let newPos = Bot.leadMovingTarget(mob.pos, mob.closestEnemyPlayer.pos, addedVel, bulletSpeed)
             if (newPos == null) newPos = mob.closestEnemyPlayer.pos
 
-            mob.rotation = getAngle(newPos, mob.pos)
+            Mob.setAngle(mob, getAngle(newPos, mob.pos))
             mob.target = {...newPos}
 
-            if (dst < mob.build.range) {
+            if (dst < mob.build.sight*0.85) {
                 Tank.shoot(mob)
             }
             
@@ -89,8 +89,7 @@ var bots = {
 
                 let newPos = Bot.leadMovingTarget(mob.pos, mob.closestEnemyPlayer.pos, addedVel, bulletSpeed)
                 if (newPos == null) newPos = mob.closestEnemyPlayer.pos
-
-                mob.rotation = getAngle(newPos, mob.pos)
+                Mob.setAngle(mob, getAngle(newPos, mob.pos))
                 mob.target = {...newPos}
 
                 if (dst < mob.build.range) {
@@ -122,7 +121,7 @@ var bots = {
                     mob.bot.movingDirection = getAngle(lowestHealth.en.pos, mob.pos)//+(Math.PI)
                     mob.bot.movingStrength = 1
                 }
-                mob.rotation = getAngle(lowestHealth.en.pos, mob.pos)
+                Mob.setAngle(mob, getAngle(lowestHealth.en.pos, mob.pos))
                 Tank.shoot(mob)
 
             } else {
