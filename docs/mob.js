@@ -17,6 +17,8 @@ class mob {
         this.team = team
 
         this.build = testObjectForUndefined(build, buildDefaultProps)
+
+        this.build.duration += randInt(-100,100)
         
 
         for (let i = 0; i < this.build.guns.length; i++) {
@@ -31,12 +33,15 @@ class mob {
         this.unload = false
 
         this.bot = {
-            active:false,
+            active:this.build.bot,
 
             movingDirection:0,
-            movingStrength:1,
+            movingStrength:0,
             moving:false,
         }
+        this.boss = this.build.boss
+
+        
 
 
         this.build.maxHealth = this.build.health
@@ -62,24 +67,33 @@ var eMob = mob
 
 var Mob = {
     update:function(mob){
+        var r = mob.vel.x
 
+        
 
         mob.chunk = mainChunks.requestChunk(mob.chunkPos.x, mob.chunkPos.y)
-
+        
+        
         if (!mob.stunned) this.move(mob, v(mob.pos.x+(mob.vel.x*deltaTime), mob.pos.y+(mob.vel.y*deltaTime)))
+        
+        
 
         var f = 1-((1-mob.build.friction)*1.5)
 
         mob.vel.x *= Math.pow(f, deltaTime)
         mob.vel.y *= Math.pow(f, deltaTime)
+        
+        //==================================================================
+
+        
 
 
         for (let i = 0; i < mob.build.guns.length; i++) {
             let gun = mob.build.guns[i]
-            if (gun.shootCooldown > 0) gun.shootCooldown -= 1 * 3 * deltaTime
+            if (gun.shootCooldown > 0) gun.shootCooldown -= 1 * 3 * deltaTime * mob.effectsConfig.reloadSpeed
         }
 
-
+        
 
         var d = getDistance(v(0,0), mob.vel)
 
@@ -95,8 +109,11 @@ var Mob = {
             mob.alpha = mob.invisA/mob.build.invisDur
         }
 
-
         mob.stunned = false
+        mob.effectsConfig = {
+            speed:1,
+            reloadSpeed:1,
+        }
 
         var keys = Object.keys(mob.effects)
         for (let i = 0; i < keys.length; i++) {
@@ -107,6 +124,7 @@ var Mob = {
             if (effect.duration < 0) {
                 delete mob.effects[key]
             } else {
+                mob.effectsConfig.reloadSpeed /= effect.freeze
                 Mob.damage(mob, (effect.damage*2*deltaTime), effect.shotBy) 
                 if (effect.stun) mob.stunned = true
             }
@@ -134,17 +152,21 @@ var Mob = {
             mob.unload = true
         }
 
-        if (mob.build.drone) {
+        if (mob.build.drone && !mob.bot.active) {
             var a = getAngle(mob.shotBy.target, mob.pos)
             mob.vel.x += Math.cos(a)*mob.build.speed*0.05
             mob.vel.y += Math.sin(a)*mob.build.speed*0.05
 
         }
+        
 
         if (mob.bot.active) {
+            mob.bot.movingDirection = mob.bot.movingDirection || 0
             Mob.moveMobiles(mob, mob.bot.movingDirection, mob.bot.movingStrength)
         }
 
+        
+        
         
         
 
@@ -155,11 +177,18 @@ var Mob = {
         var h = mob.build.health
             mob.build.health = clamp(mob.build.health - damage, 0, mob.build.maxHealth)
         if (h>0 && mob.build.health <= 0) {
-                                                            if (mob.id == player1.id) {
+                                                            if (mob.id == cameraTarget.id) {
                 Chat.submitMsg(`Died by ${shotBy.build.name.toUpperCase()}'s hands`)
+                cameraTarget = shotBy
+                players.push(shotBy)
+
             }
-            if (shotBy.id == player1.id) {
+            if (shotBy.id == cameraTarget.id) {
                 Chat.submitMsg(`Killed ${mob.build.name.toUpperCase()}`)
+            }
+            if (mob.player && mob.team == player1.team) {
+                Chat.submitMsg(`${mob.build.name.toUpperCase()} was killed`)
+
             }
         }
         
@@ -175,6 +204,12 @@ var Mob = {
          if (mob.build.exploding && !mob.unload) {
             Mob.explode(mob)
 
+         }
+         if (mob.drones.length > 0) {
+             for (let i = 0; i < mob.drones.length; i++) {
+                 const drone = mob.drones[i];
+                 drone.unload = true
+             }
          }
      },
      explode(mob) {
@@ -202,6 +237,7 @@ var Mob = {
     },
     runCollisions(mob1,mob2) {
             if (getDistance(mob1.pos, mob2.pos) < mob1.build.size+mob2.build.size) {
+                
                 let angle = getAngle(mob2.pos, mob1.pos),
                     strength = Math.pow(1/clamp(getDistance(mob2.pos, mob1.pos), 0.1, 100), 1.1)*10
                 
@@ -253,6 +289,7 @@ var Mob = {
 
 
         if ((preChunk && mob.chunk) && preChunk.id != newChunk.id) {
+            
             mob.chunk = newChunk
             
 
@@ -282,7 +319,7 @@ var Mob = {
             
 
             ctx.fillStyle = "#000000"
-            ctx.fillRect(mob.pos.x+(mob.build.size*0.8), mob.pos.y - ((gun.width) / 2), (gun.height*1.5), gun.width)
+            ctx.fillRect(mob.pos.x, mob.pos.y - ((gun.width) / 2)+gun.offset, mob.build.size+(gun.height*1), gun.width)
             ctx.strokeStyle = "#707070"
             ctx.lineWidth = 2
 
@@ -290,26 +327,46 @@ var Mob = {
         }
 
         ctx.fillStyle = mob.team
-
+ctx.save()
         ctx.beginPath()
-        ctx.arc(mob.pos.x, mob.pos.y, mob.build.size, 0, Math.PI*2)
+        
+        if (mob.build.shape != 1) {
+            var numberOfSides = mob.build.shape,
+            size = mob.build.size,
+            Xcenter = mob.pos.x,
+            Ycenter = mob.pos.y;
+            ctx.translate(Xcenter, Ycenter)
+            ctx.rotate(mob.rotation+(Math.PI*0.25)+(5*(Math.PI/180)))
+            ctx.translate(-Xcenter, -Ycenter)
+
+        ctx.moveTo (Xcenter +  size * Math.cos(0), Ycenter +  size *  Math.sin(0));          
+        
+        for (var i = 1; i <= numberOfSides;i += 1) {
+        ctx.lineTo (Xcenter + size * Math.cos(i * 2 * Math.PI / numberOfSides), Ycenter + size * Math.sin(i * 2 * Math.PI / numberOfSides));
+        }
+        } else {
+            ctx.arc(mob.pos.x, mob.pos.y, mob.build.size, 0, Math.PI*2)
+        }
         ctx.closePath()
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 1;
         ctx.fill()
         ctx.strokeStyle = pSBC(-0.5, mob.team)
         ctx.lineWidth = 2
         ctx.stroke()
+        ctx.restore()
 
         let length = 25,
             width = 5,
             height = 20
 
-        if (!mob.build.isBullet) {
+        if (mob.build.CONFIG.showHealthBar) {
 
             ctx.fillStyle = "#696969"
-            ctx.fillRect(mob.pos.x-(length/2), mob.pos.y-height-width, length, width)
+            ctx.fillRect(mob.pos.x-(length/2), mob.pos.y-height-width-mob.build.size, length, width)
 
             ctx.fillStyle = "#7fff7f"
-            ctx.fillRect(mob.pos.x-(length/2), mob.pos.y-height-width, length*(mob.build.health/mob.build.maxHealth), width)
+            ctx.fillRect(mob.pos.x-(length/2), mob.pos.y-height-width-mob.build.size, length*(mob.build.health/mob.build.maxHealth), width)
         }
             
 
@@ -317,12 +374,21 @@ ctx.restore()
     },
     runAi(mob) {
         if (mob.bot.active) {
+            //console.log(mob.build.name)
             if (bots[mob.build.name] != undefined) {
                 bots[mob.build.name](mob)
 
             } else if (mob.build.guns.length != 0) {
                 bots["starter"](mob)
 
+            }
+        }
+        if (mob.bot.active && mob.build.drone) {
+            var dst = getDistance(mob.pos, mob.shotBy.pos) 
+            //console.log(dst)
+            if (dst > 1000) {
+                mob.bot.movingStrength = 1
+                mob.bot.movingDirection = getAngle(mob.pos, mob.shotBy.pos) + Math.PI
             }
         }
 
@@ -341,13 +407,19 @@ ctx.restore()
         if (mob.build.autoShoot) {
             Tank.shoot(mob)
         }
+        for (let i = 0; i < mob.build.guns.length; i++) {
+            const gun = mob.build.guns[i];
+            if (gun.autoShoot) {
+                Tank.shootGun(mob, gun, gun.rmb)
+            }
+        }
         if (mob.build.autoSpin) {
             mob.rotation += 1.5*(Math.PI/180) * deltaTime
         }
     },
 
     moveMobiles(mob, angle, strength) {
-        strength = clamp(strength, -1, 1)
+        strength = clamp(strength, -1, 1)//*(mob.player?0.3:1)
 
         mob.vel.x += Math.cos(angle)*mob.build.speed*0.2*deltaTime*strength
         mob.vel.y += Math.sin(angle)*mob.build.speed*0.2*deltaTime*strength
@@ -355,12 +427,8 @@ ctx.restore()
 }
 
 var Tank = {
-    shoot(mobM, rmb=false) {
-        
-        if (!mobM.stunned) {
-            for (let i = 0; i < mobM.build.guns.length; i++) {
-                let gun = mobM.build.guns[i]
-                var d = [...mobM.shotBy.drones],
+    shootGun(mobM, gun, rmb) {
+        var d = [...mobM.shotBy.drones],
                     dl = d.length
                 for (let i = 0; i < dl; i++) {
                     const drone = d[i];
@@ -369,19 +437,31 @@ var Tank = {
                     }
                 }
                 if (gun.shootCooldown <= 0 && gun.rmb == rmb && ((gun.bullet.build.drone)?(mobM.shotBy.drones.length<mobM.build.droneCap):true)) {
+
+                    var offsetPos = v(
+                        Math.cos((mobM.rotation+(gun.pos*(Math.PI/180)))+(Math.PI*0.5))*(gun.offset),
+                        Math.sin((mobM.rotation+(gun.pos*(Math.PI/180)))+(Math.PI*0.5))*(gun.offset),
+                    )
                     let bulletPos = v(
-                        mobM.pos.x+(Math.cos(mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5)),
-                        mobM.pos.y+(Math.sin(mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5))
+                        mobM.pos.x+(Math.cos(mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5))+offsetPos.x,
+                        mobM.pos.y+(Math.sin(mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5))+offsetPos.y
                     )
 
                     let bullet = new mob(bulletPos, JSON.parse(JSON.stringify(gun.bullet.build)), mobM.team)
-                        
+
+                    if (!bullet.build.drone && !bullet.bot.active) {
+                        bullet.build.teamPenetration = 0
+                    }
+
                     var randomMovement = (randInt(-gun.spread, gun.spread)/300)*Math.PI*2
 
                         
                     var angle = ((gun.pos+180)*(Math.PI/180))+mobM.rotation
-                    mobM.vel.x += Math.cos(angle)*gun.recoilMod*0.01
-                    mobM.vel.y += Math.sin(angle)*gun.recoilMod*0.01
+
+                    var bulletMod = (bullet.build.size/15)*(bullet.build.speed/3)
+
+                    mobM.vel.x += Math.cos(angle)*gun.recoilMod*0.4*bulletMod
+                    mobM.vel.y += Math.sin(angle)*gun.recoilMod*0.4*bulletMod
 
                     bullet.vel = v(
                         Math.cos(randomMovement+mobM.rotation+(gun.pos*(Math.PI/180)))*(gun.height*1.5)*0.05*bullet.build.speed,
@@ -399,12 +479,19 @@ var Tank = {
                     Mob.spawn(bulletPos, bullet, mainChunks)
                     
                     gun.shootCooldown = gun.speed
-
                     if (bullet.build.drone) {
+                        
                         mobM.shotBy.drones.push(bullet)
                     }
 
                 } 
+    },
+    shoot(mobM, rmb=false) {
+        
+        if (!mobM.stunned) {
+            for (let i = 0; i < mobM.build.guns.length; i++) {
+                let gun = mobM.build.guns[i]
+                Tank.shootGun(mobM, gun, rmb)
 
             }
         }

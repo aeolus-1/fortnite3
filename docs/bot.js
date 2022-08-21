@@ -26,15 +26,30 @@ var Bot = {
             const friend = mob.closestFriend[i];
             averagePos.x += friend.pos.x
             averagePos.y += friend.pos.y
+            if (false && friend.boss) {
+                averagePos.x += friend.pos.x*9
+                averagePos.y += friend.pos.y*9
+                plus += 9
+            }
+
         }
-        averagePos.x /= mob.closestFriend.length
-        averagePos.y /= mob.closestFriend.length
+        var plus = 0
+        if (mob.build.drone && mob.bot.active) {
+            averagePos.x += mob.shotBy.pos.x*10
+            averagePos.y += mob.shotBy.pos.y*10
+            plus += 10
+        }
+        averagePos.x /= mob.closestFriend.length+plus
+        averagePos.y /= mob.closestFriend.length+plus
 
         let dst = getDistance(mob.pos, averagePos)
 
+        mob.bot.movingStrength = -1
+        mob.bot.movingDirection = getAngle(averagePos, mob.pos)+(Math.PI)
 
-        mob.bot.moving = true
-        mob.bot.movingDirection = getAngle(averagePos, mob.pos)
+        if (dst < 200) {
+            mob.bot.movingStrength = 0
+        }
         
     },
     leadMovingTarget(player, enemy, enemyVel, v) {

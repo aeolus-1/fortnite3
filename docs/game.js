@@ -1,9 +1,13 @@
-function genMobs(num, range=10000) {
+function genMobs(num, range=10000, pos=v(0,0), team="#f00") {
     for (let i = 0; i < num; i++) {
     var range = range
-        var rndPos = v(randInt(-range, range),randInt(-range, range))
-        let pos = mainChunks.posToChunkPos(rndPos),
-            chunkM = mainChunks.requestChunk(pos.x, pos.y)
+        var a = randInt(0, 360)*(Math.PI/180),//(i/num)*Math.PI*2
+            dst = randInt(Math.max(300, range*0.2), range)
+
+        var rndPos = v(pos.x+(Math.cos(a)*dst), pos.y+(Math.sin(a)*dst))
+
+        let cpos = mainChunks.posToChunkPos(rndPos),
+            chunkM = mainChunks.requestChunk(cpos.x, cpos.y)
 
             var build = Object.keys(badBuilds),
                 rnd = randInt(0, build.length-1),
@@ -12,7 +16,7 @@ function genMobs(num, range=10000) {
             build = badBuilds[build[rnd]]
 
             build.name = name
-        let m = new mob(rndPos, JSON.parse(JSON.stringify(build)))
+        let m = new mob(rndPos, JSON.parse(JSON.stringify(build)), team)
         m.bot.active = true
         m.player = true
         m.shotBy = m
@@ -24,6 +28,21 @@ function genMobs(num, range=10000) {
         mainChunks.insertMob(chunkM.pos.x, chunkM.pos.y, m)
     }
 }
+
+function spawnMob(pos, build, team) {
+    let cpos = mainChunks.posToChunkPos(pos),
+            chunkM = mainChunks.requestChunk(cpos.x, cpos.y)
+    let m = new mob(pos, JSON.parse(JSON.stringify(build)), team)
+        m.bot.active = true
+        m.player = true
+        m.shotBy = m
+
+       return m
+
+
+        
+}
+
 
 var mainChunks = new Chunks({})
 
@@ -40,11 +59,16 @@ var buildDefaultProps = {
     duration:300,
     guns:[],
     friction:0.9,
+
     sight:600,
     range:500,
+
+    drone:false,
     drones:[],
     droneCap:6,
     replacesDrones:false,
+
+
     invisDur:0,
     durSeperation:0,
     damageMod:1,
@@ -53,15 +77,18 @@ var buildDefaultProps = {
     static:false,
     baseValue:1,
 
-    penetration:1,
 
+    shape:1,
+
+    penetration:1,
 
     isBullet:false,
     environment:false,
 
     autoShoot: false,
+    bot:false,
 
-    teamPenetration:0,
+    teamPenetration:1,
 
 
 }
@@ -72,6 +99,8 @@ var gunDefaultProps = {
     speed:200,
     spread:3,
     recoilMod:1,
+    offset:0,
+    autoShoot:false,
     bullet:{
         pos: {
             x: 0,

@@ -4,65 +4,83 @@ function runMobs() {
     loadedMobs = new Array()
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
-        let playerPos = v(player.chunkPos.x-2, player.chunkPos.y-2)
 
-        let chunks = mainChunks.requestChunks(playerPos.x, playerPos.y, 5, 5)
+        var loadRange = ((4)*2)+1
+
+        let playerPos = v(player.chunkPos.x-(Math.floor(loadRange/2)), player.chunkPos.y-Math.floor(loadRange/2))
+
+        let chunks = mainChunks.requestChunks(playerPos.x, playerPos.y, loadRange, loadRange)
         
         let mobs = mainChunks.getMobiles(chunks)
         loadedMobs = [...loadedMobs, ...mobs]
     }
-    
+    var alreadyDone = []
     for (let i = 0; i < loadedMobs.length; i++) {
         let mob = loadedMobs[i];
-        Mob.update(mob)
-        if (true) {
-            Mob.runAi(mob)
+        if (!alreadyDone.includes(mob.id)) {
+        
+            Mob.update(mob)
+            if (true) {
+                Mob.runAi(mob)
 
-            mob.closestEnemy = undefined
-            mob.closestFriend = new Array()
+                mob.closestEnemy = undefined
+                mob.closestEnemyPlayer = undefined
+                mob.closestFriend = new Array()
 
-            cEnemy = {mob:undefined, dst:Infinity}
+                cEnemy = {mob:undefined, dst:Infinity}
+                cEnemyPlayer = {mob:undefined, dst:Infinity}
 
-            if (mob.unload) {
-                mainChunks.removeMob(mob.chunkPos.x, mob.chunkPos.y, mob)
-                delete mob
-            } else {
-                for (let i2 = 0; i2 < loadedMobs.length; i2++) {
+                if (mob.unload) {
+                    mainChunks.removeMob(mob.chunkPos.x, mob.chunkPos.y, mob)
+                    delete mob
+                } else {
+                    for (let i2 = 0; i2 < loadedMobs.length; i2++) {
 
 
-                    const mob2 = loadedMobs[i2];
+                        const mob2 = loadedMobs[i2];
 
-                    var dst = getDistance(mob2.pos, mob.pos)
-                    if (dst < mob.build.sight) {
+                        var dst = getDistance(mob2.pos, mob.pos)
+                        if (true) {
 
-                        if (mob.team == mob2.team && mob2.player) {
-                            mob.closestFriend.push(mob2)
-                        }
+                            if (mob.team == mob2.team && mob2.player && dst < Infinity) {
+                                mob.closestFriend.push(mob2)
+                            }
 
-                        if (mob.id != mob2.id) {
-                            if (mob.team != mob2.team) {
-
-                                if (mob2.player && mob2.alpha > 0.2) {
-                                    let dst = getDistance(mob.pos, mob2.pos)
-                                    if (dst < cEnemy.dst) {
-                                        cEnemy.mob = mob2
-                                        cEnemy.dst = dst
+                            if (mob.id != mob2.id) {
+                                if (mob.team != mob2.team) {
+                                    if (mob2.alpha > 0.2) {
+                                        if (mob2.player || mob2.bot.active) {
+                                            let dst = getDistance(mob.pos, mob2.pos)
+                                            if (dst < cEnemyPlayer.dst) {
+                                                cEnemyPlayer.mob = mob2
+                                                cEnemyPlayer.dst = dst
+                                            }
+                                            mob.closestEnemyPlayer = cEnemyPlayer.mob
+                                        }
+                                        
+                                        let dst = getDistance(mob.pos, mob2.pos)
+                                        if (dst < cEnemy.dst) {
+                                            cEnemy.mob = mob2
+                                            cEnemy.dst = dst
+                                        }
+                                        mob.closestEnemy = cEnemy.mob
+                                        
                                     }
-                                    mob.closestEnemy = cEnemy.mob
+                                }
+
+                                if (true) {
+                                    Mob.runCollisions(mob, mob2)
+                                    Mob.runCollisions(mob2, mob)
                                 }
                             }
-
-                            if (true) {
-                                Mob.runCollisions(mob, mob2)
-                                Mob.runCollisions(mob2, mob)
-                            }
+                        
                         }
-                    
+
+
                     }
-
-
                 }
             }
+            alreadyDone.push(mob.id)
         }
         
     }
@@ -72,7 +90,8 @@ function runMobs() {
 
 var players = new Array()
 
-var camera = v(0, 0)
+var camera = v(0, 0),
+    cameraTarget = v(0,0)
 
 
 var preTime = (new Date).getTime(),
@@ -92,21 +111,23 @@ function updateFps() {
     preTime = time
 
 
-    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.5
+    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.7
 }
 
 function mainloop() {
-    runKeys()
 
     let gameMouse = v(
-        mouse.x-((window.innerWidth/2)-camera.x),
-        mouse.y-((window.innerHeight/2)-camera.y)
+        ((mouse.x)-((window.innerWidth/2)-(camera.x*globalScale)))/globalScale,
+        ((mouse.y)-((window.innerHeight/2)-(camera.y*globalScale)))/globalScale
     )
 
 
     player1.rotation = getAngle(gameMouse, player1.pos)
 
     player1.target = {...gameMouse}
+
+    runKeys()
+
     
 
     runMobs()

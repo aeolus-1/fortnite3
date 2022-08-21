@@ -1,6 +1,6 @@
-var cbuild = (prompt(Object.keys(badBuilds)) || "mine")
-var player1 = new mob(v(0,0), badBuilds[cbuild]),
-    player2 = new mob(v(500,0), badBuilds.megaMine)
+var cbuild = (prompt(Object.keys(badBuilds)) || "toxic")
+var player1 = new mob(v(1500,100), badBuilds[cbuild])
+    //player2 = new mob(v(2000,0), bossBuilds.mothership)
 
 
 Chat.submitMsg(`Started as ${cbuild.toUpperCase()}`)
@@ -8,20 +8,30 @@ Chat.submitMsg(`Started as ${cbuild.toUpperCase()}`)
 player1.player = true
 player1.shotBy = player1
 
+cameraTarget = player1
+
+player1.team = "#f0f"
+/*player2.team = "#ff0"
+
+
 player2.player = true
 player2.shotBy = player2
 
-player1.team = "#f0f"
-player2.team = "#f0f"
+
+
 
 
 player2.controls = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
 player2.bot.active = true
+*/
+
 
 players.push(player1)
 //players.push(player2)
 
+players.push(spawnMob(v(1500,0), bossBuilds.mothership, "#f0f"))
+genMobs(10, 100, v(1500,0), "#f0f")
 
 
-//genMobs(200)
-genMobs(1, 300)
+players.push(spawnMob(v(-1500,0), bossBuilds.mothership, "#ff0"))
+genMobs(10, 100, v(-1500,0), "#ff0")

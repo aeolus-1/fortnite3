@@ -50,8 +50,7 @@ function runKeys() {
 
             let angle = getAngle(v(0,0), movement)
             
-            player.vel.x += Math.cos(angle) * 0.2 * player.build.speed
-            player.vel.y += Math.sin(angle) * 0.2 * player.build.speed
+            Mob.moveMobiles(player1, angle, 1)
 
 
         }
