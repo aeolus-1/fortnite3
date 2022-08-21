@@ -118,7 +118,7 @@ var Mob = {
             } else {
                 mob.effectsConfig.reloadSpeed /= effect.freeze;
                 Mob.damage(mob, effect.damage * 2 * deltaTime, effect.shotBy);
-                if (effect.stun) mob.stunned = true;
+                if (effect.stun && (mob.player || mob.bot.active)) mob.stunned = true;
             }
         }
 
@@ -168,7 +168,7 @@ var Mob = {
         var targetA = angle/(Math.PI/180),
             currentA = mob.rotation/(Math.PI/180)
 
-        mob.rotation -= clamp((angleDiff(targetA, currentA))*(Math.PI/180)*mob.build.turningSpeed, -1, 1)
+        if (!mob.stunned) mob.rotation -= clamp((angleDiff(targetA, currentA))*(Math.PI/180)*mob.build.turningSpeed, -1, 1)
     },
     spawn(
         pos = v(0, 0),
@@ -388,97 +388,98 @@ var Mob = {
         ctx.restore();
     },
     runAi(mob) {
-        if (mob.bot.active) {
-            //console.log(mob.build.name)
-            if (bots[mob.build.name] != undefined) {
-                bots[mob.build.name](mob);
-            } else if (mob.build.guns.length != 0) {
-                bots["starter"](mob);
+        if (!mob.stunned) {
+            if (mob.bot.active) {
+                //console.log(mob.build.name)
+                if (bots[mob.build.name] != undefined) {
+                    bots[mob.build.name](mob);
+                } else if (mob.build.guns.length != 0) {
+                    bots["starter"](mob);
+                }
             }
-        }
-        if (mob.bot.active && mob.build.drone) {
-            var dst = getDistance(mob.pos, mob.shotBy.pos);
-            //console.log(dst)
-            if (dst > 400) {
-                mob.bot.movingStrength = 1;
-                mob.bot.movingDirection = getAngle(mob.pos, mob.shotBy.pos) + Math.PI;
+            if (mob.bot.active && mob.build.drone) {
+                var dst = getDistance(mob.pos, mob.shotBy.pos);
+                //console.log(dst)
+                if (dst > 400) {
+                    mob.bot.movingStrength = 1;
+                    mob.bot.movingDirection = getAngle(mob.pos, mob.shotBy.pos) + Math.PI;
+                }
             }
-        }
 
-        if (mob.build.seeking) {
-            if (mob.closestEnemy != undefined) {
-                var a = getAngle(mob.closestEnemy.pos, mob.pos);
+            if (mob.build.seeking) {
+                if (mob.closestEnemy != undefined) {
+                    var a = getAngle(mob.closestEnemy.pos, mob.pos);
 
-                mob.vel.x += Math.cos(a) * mob.build.speed * 0.2 * deltaTime;
-                mob.vel.y += Math.sin(a) * mob.build.speed * 0.2 * deltaTime;
+                    mob.vel.x += Math.cos(a) * mob.build.speed * 0.2 * deltaTime;
+                    mob.vel.y += Math.sin(a) * mob.build.speed * 0.2 * deltaTime;
+                }
             }
-        }
 
-        if (mob.build.autoShoot) {
-            Tank.shoot(mob);
-        }
-        for (let i = 0; i < mob.build.guns.length; i++) {
-            const gun = mob.build.guns[i];
-            if (gun.autoShoot) {
-                Tank.shootGun(mob, gun, gun.rmb);
+            if (mob.build.autoShoot) {
+                Tank.shoot(mob);
             }
-            if (gun.auto) {
-                var gunPos = v(
-                    mob.pos.x +
-                    Math.cos(mob.rotation + gun.pos * (Math.PI / 180)) *
-                    mob.build.size,
-                    mob.pos.y +
-                    Math.sin(mob.rotation + gun.pos * (Math.PI / 180)) *
-                    mob.build.size
-                )
-                var closeEn = { dst: Infinity, en: undefined }
-                for (let i = 0; i < mob.enemyPlayers.length; i++) {
-                    const enMob = mob.enemyPlayers[i];
-                    if (enMob.player || enMob.bot.active) {
-                        var a = (getAngle(enMob.pos,
-                            gunPos
-                        ) - (mob.rotation)) - (gun.pos * (Math.PI / 180))
-                        if (Math.abs(a)/(Math.PI / 180) < 95) {
-                            var dst = getDistance(enMob.pos, gunPos)
-                            if (dst < closeEn.dst) {
-                                closeEn.dst = dst
-                                closeEn.en = enMob
+            for (let i = 0; i < mob.build.guns.length; i++) {
+                const gun = mob.build.guns[i];
+                if (gun.autoShoot) {
+                    Tank.shootGun(mob, gun, gun.rmb);
+                }
+                if (gun.auto) {
+                    var gunPos = v(
+                        mob.pos.x +
+                        Math.cos(mob.rotation + gun.pos * (Math.PI / 180)) *
+                        mob.build.size,
+                        mob.pos.y +
+                        Math.sin(mob.rotation + gun.pos * (Math.PI / 180)) *
+                        mob.build.size
+                    )
+                    var closeEn = { dst: Infinity, en: undefined }
+                    for (let i = 0; i < mob.enemyPlayers.length; i++) {
+                        const enMob = mob.enemyPlayers[i];
+                        if (enMob.player || enMob.bot.active) {
+                            var a = (getAngle(enMob.pos,
+                                gunPos
+                            ) - (mob.rotation)) - (gun.pos * (Math.PI / 180))
+                            if (Math.abs(a)/(Math.PI / 180) < 95) {
+                                var dst = getDistance(enMob.pos, gunPos)
+                                if (dst < closeEn.dst) {
+                                    closeEn.dst = dst
+                                    closeEn.en = enMob
+                                }
                             }
                         }
                     }
+                    if (closeEn.en != undefined) {
+                        var en = closeEn.en
+
+                        var m = 0.2,
+                            addedVel = v((en.vel.x-mob.vel.x)*m*deltaTime, (en.vel.y-mob.vel.y)*m*deltaTime)
+
+
+                        var newPos = Bot.leadMovingTarget(mob.pos, en.pos, addedVel, gun.bullet.build.speed*deltaTime)
+
+                        var a = (getAngle(newPos,
+                            v(
+                                mob.pos.x +
+                                Math.cos(mob.rotation + gun.pos * (Math.PI / 180)) *
+                                mob.build.size,
+                                mob.pos.y +
+                                Math.sin(mob.rotation + gun.pos * (Math.PI / 180)) *
+                                mob.build.size
+                            )
+                        ) - (mob.rotation)) - (gun.pos * (Math.PI / 180))
+                        gun.rotation = a
+                        Tank.shootGun(mob, gun, false)
+                    
+                    }
+
+                    
                 }
-                if (closeEn.en != undefined) {
-                    var en = closeEn.en
-
-                    var m = 0.2,
-                        addedVel = v((en.vel.x-mob.vel.x)*m*deltaTime, (en.vel.y-mob.vel.y)*m*deltaTime)
-
-
-                    var newPos = Bot.leadMovingTarget(mob.pos, en.pos, addedVel, gun.bullet.build.speed*deltaTime)
-
-                    var a = (getAngle(newPos,
-                        v(
-                            mob.pos.x +
-                            Math.cos(mob.rotation + gun.pos * (Math.PI / 180)) *
-                            mob.build.size,
-                            mob.pos.y +
-                            Math.sin(mob.rotation + gun.pos * (Math.PI / 180)) *
-                            mob.build.size
-                        )
-                    ) - (mob.rotation)) - (gun.pos * (Math.PI / 180))
-                    gun.rotation = a
-                    Tank.shootGun(mob, gun, false)
-                
-                }
-
-                
+            }
+            if (mob.build.autoSpin) {
+                mob.rotation += 1.5 * (Math.PI / 180) * deltaTime;
             }
         }
-        if (mob.build.autoSpin) {
-            mob.rotation += 1.5 * (Math.PI / 180) * deltaTime;
-        }
     },
-
     moveMobiles(mob, angle, strength) {
         strength = clamp(strength, -1, 1); //*(mob.player?0.3:1)
 

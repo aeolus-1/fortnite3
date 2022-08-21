@@ -116,7 +116,21 @@ function updateFps() {
     deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.7
 }
 
+var preDim = v(
+    window.innerWidth,
+    window.innerHeight
+)
+
 function mainloop() {
+
+    if (preDim.x != window.innerWidth || preDim.y != window.innerHeight) {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        preDim = v(
+            window.innerWidth,
+            window.innerHeight
+        )
+    }
 
     let gameMouse = v(
         ((mouse.x)-((window.innerWidth/2)-(camera.x*globalScale)))/globalScale,
