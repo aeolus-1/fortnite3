@@ -17,7 +17,7 @@ class mob {
 
         this.build = testObjectForUndefined(build, buildDefaultProps);
 
-        this.build.duration += randInt(-100, 100);
+        this.build.duration += randInt(-5, 5);
 
         for (let i = 0; i < this.build.guns.length; i++) {
             this.build.guns[i] = testObjectForUndefined(

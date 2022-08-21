@@ -183,7 +183,7 @@ var builds = {
 }
 
 var badBuilds = {
-    /*
+    
     port_a_fort: {
         name:"port_a_fort",
         health: 60,
@@ -243,6 +243,7 @@ var badBuilds = {
                                     friction: 0.9,
                                     baseValue: 0,
                                     sight: 0,
+                                    teamPenetration:0,
                                     
                                     exploding: {
                                         strength: 1,
@@ -312,7 +313,7 @@ var badBuilds = {
 
                 },
                 recoilVel: 0,
-                autoShoot: true,
+                autoShoot: false,
                 shootCooldown: 0
             },
             
@@ -321,7 +322,7 @@ var badBuilds = {
                 height: 10,
                 ogLength: 0,
                 width: 20,
-                speed: 100,
+                speed: 600,
                 spread: 1,
                 recoilMod: 5,
                 bullet: {
@@ -345,7 +346,7 @@ var badBuilds = {
                         size: 15,
                         maxHealth: 3,
                         bodyDamage: 1,
-                        duration: 400,
+                        duration: 650,
                         friction: 1,
                         baseValue: 0,
                         sight: 0,
@@ -368,7 +369,7 @@ var badBuilds = {
         CONFIG: {
             showHealthBar: true
         }
-    },*/
+    },
     flameThrower: {
         name:"flameThrower",
         health: 100,
@@ -2913,8 +2914,8 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        health: 35,
-                        speed: 1.5,
+                        health: 60,
+                        speed: 10,
                         size: 35,
                         maxHealth: 20,
                         bodyDamage: 2,
@@ -4384,7 +4385,6 @@ let mothershipAutoGun = {
 
     },
     recoilVel: 0,
-        autoShoot:true,
 
     shootCooldown: 0
 }
