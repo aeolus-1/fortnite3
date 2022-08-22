@@ -19,8 +19,8 @@ function genMobs(num, range=10000, pos=v(0,0), team="#f00") {
         let m = new mob(rndPos, JSON.parse(JSON.stringify(build)), team)
         m.bot.active = true
         m.player = true
-        m.build.maxHealth *= 3
-        m.build.health *= 3
+        //m.build.maxHealth *= 3
+        //m.build.health *= 3
         m.shotBy = m
 
        

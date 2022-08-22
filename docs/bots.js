@@ -2,7 +2,7 @@ var bots = {
     classRammer(mob) {
 
     },
-    starter(mob) {
+    basic(mob) {
         if (mob.closestEnemyPlayer != undefined){
 
             let dst = getDistance(mob.pos, mob.closestEnemyPlayer.pos)
@@ -29,7 +29,7 @@ var bots = {
 
             
             
-            var m = 0.2
+            var m = 0.5
             let addedVel = v((mob.closestEnemyPlayer.vel.x+mob.vel.x)*m*deltaTime, (mob.closestEnemyPlayer.vel.y+mob.vel.y)*m*deltaTime)
             
             if (mob.build.guns[0] == undefined) console.log(mob.build)

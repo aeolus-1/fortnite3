@@ -187,7 +187,8 @@ var Mob = {
         if (mob.drones.length > 0) {
             for (let i = 0; i < mob.drones.length; i++) {
                 const drone = mob.drones[i];
-                drone.unload = true;
+                drone.build.health = 0;
+                console.log(drone)
             }
         }
     },
@@ -392,11 +393,13 @@ var Mob = {
         if (!mob.stunned) {
             if (mob.bot.active) {
                 //console.log(mob.build.name)
+                if (mob.build.guns.length != 0) {
+                    bots["basic"](mob);
+
+                }
                 if (bots[mob.build.name] != undefined) {
                     bots[mob.build.name](mob);
-                } else if (mob.build.guns.length != 0) {
-                    bots["starter"](mob);
-                }
+                } 
             }
             if (mob.bot.active && mob.build.drone) {
                 var dst = getDistance(mob.pos, mob.shotBy.pos);
@@ -437,10 +440,11 @@ var Mob = {
                     for (let i = 0; i < mob.enemyPlayers.length; i++) {
                         const enMob = mob.enemyPlayers[i];
                         if (enMob.player || enMob.bot.active) {
-                            var a = (getAngle(enMob.pos,
-                                gunPos
-                            ) - (mob.rotation)) - (gun.pos * (Math.PI / 180))
-                            if (Math.abs(a)/(Math.PI / 180) < 95) {
+                            var a = Math.abs(angleDiff(
+                                getAngle(gunPos,enMob.pos,)/(Math.PI / 180),
+                                ((mob.rotation + (gun.pos * (Math.PI / 180)))/(Math.PI / 180))-180
+                            ))
+                            if (a < 95) {
                                 var dst = getDistance(enMob.pos, gunPos)
                                 if (dst < closeEn.dst) {
                                     closeEn.dst = dst
@@ -452,8 +456,8 @@ var Mob = {
                     if (closeEn.en != undefined) {
                         var en = closeEn.en
 
-                        var m = 0.2,
-                            addedVel = v((en.vel.x-mob.vel.x)*m*deltaTime, (en.vel.y-mob.vel.y)*m*deltaTime)
+                        var m = 1,
+                            addedVel = v((-mob.vel.x)*deltaTime*m, (mob.vel.y)*deltaTime*m)
 
 
                         var newPos = Bot.leadMovingTarget(mob.pos, en.pos, addedVel, gun.bullet.build.speed*deltaTime)

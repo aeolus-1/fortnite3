@@ -113,7 +113,7 @@ function updateFps() {
     preTime = time
 
 
-    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.7
+    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.5
 }
 
 var preDim = v(

@@ -4,7 +4,7 @@ for (let i = 0; i < Object.keys(badBuilds).length; i++) {
     text = text + `\n- ${key}`
 }
 
-var cbuild = (prompt(text))
+var cbuild = (prompt(text) || "octo")
 while (badBuilds[cbuild] == undefined) {
     alert("not an build")
     cbuild = (prompt(text))
@@ -39,9 +39,9 @@ player2.bot.active = true
 players.push(player1)
 //players.push(player2)
 
-players.push(spawnMob(v(1200,0), bossBuilds.mothership, "#f0f"))
+players.push(spawnMob(v(1500,0), bossBuilds.mothership, "#f0f"))
 genMobs(6, 100, v(1500,0), "#f0f")
 
 
-players.push(spawnMob(v(-1200,0), bossBuilds.mothership, "#ff0"))
+players.push(spawnMob(v(-1500,0), bossBuilds.mothership, "#ff0"))
 genMobs(6, 100, v(-1500,0), "#ff0")
