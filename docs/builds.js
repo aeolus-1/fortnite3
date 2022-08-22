@@ -350,7 +350,7 @@ var badBuilds = {
     flameThrower: {
         name: "flameThrower",
         health: 100,
-        speed: 0.83,
+        speed: 0.65,
         size: 15,
         maxHealth: 200,
         bodyDamage: 0.5,
@@ -364,9 +364,9 @@ var badBuilds = {
                 height: 25,
                 ogLength: 0,
                 width: 12,
-                speed: 5,
+                speed: 7,
                 spread: 3,
-                recoilMod: 5,
+                recoilMod: 0.5,
                 bullet: {
                     pos: {
                         x: 0,
@@ -383,12 +383,12 @@ var badBuilds = {
                     },
                     alive: true,
                     build: {
-                        health: 30,
-                        speed: 2,
-                        size: 5,
+                        health: 50,
+                        speed: 9,
+                        size: 8,
                         maxHealth: Infinity,
-                        bodyDamage: 0.5,
-                        duration: 80,
+                        bodyDamage: 1.4,
+                        duration: 13,
                         friction: 1,
                         baseValue: 0,
                         sight: 0,
@@ -3860,7 +3860,7 @@ var badBuilds = {
         range: 0,
         guns: [],
         exploding: {
-            strength: 50,
+            strength: 39,
             bullet: {
                 pos: {
                     x: 0,
@@ -3881,8 +3881,8 @@ var badBuilds = {
                     speed: 2,
                     size: 5,
                     maxHealth: 4,
-                    bodyDamage: 5,
-                    duration: 300,
+                    bodyDamage: 1.9,
+                    duration: 100,
                     friction: 1,
                     baseValue: 0,
                     sight: 0,

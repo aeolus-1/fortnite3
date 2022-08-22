@@ -210,8 +210,8 @@ var Mob = {
                 var a =
                     mob.rotation +
                     (360 / mob.build.exploding.strength) * i * (Math.PI / 180);
-                tbullet.vel.x += Math.cos(a) * mob.build.exploding.strength;
-                tbullet.vel.y += Math.sin(a) * mob.build.exploding.strength;
+                tbullet.vel.x += (Math.cos(a) * mob.build.exploding.strength)+randInt(-0.1,0.1);
+                tbullet.vel.y += (Math.sin(a) * mob.build.exploding.strength)+randInt(-0.1,0.1);
             }
         }
     },

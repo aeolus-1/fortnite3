@@ -43,7 +43,7 @@ function runMobs() {
                         var dst = getDistance(mob2.pos, mob.pos)
                         if (true) {
 
-                            if (mob.team == mob2.team && mob2.player && dst < Infinity) {
+                            if (mob.team == mob2.team && (mob2.player || mob2.bot.active) && dst < Infinity) {
                                 mob.closestFriend.push(mob2)
                             }
 
