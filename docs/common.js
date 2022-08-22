@@ -18,6 +18,17 @@ function rotate(t, n, e) {
     var diff = ( angle2 - angle1 + 180 ) % 360 - 180;
     return diff < -180 ? diff + 360 : diff;
   }
+  function xmur3(t) {
+    for (var n = 0, e = 1779033703 ^ t.length; n < t.length; n++)
+      e = ((e = Math.imul(e ^ t.charCodeAt(n), 3432918353)) << 13) | (e >>> 19);
+   return function () {
+      return (
+        (e = Math.imul(e ^ (e >>> 16), 2246822507)),
+        (e = Math.imul(e ^ (e >>> 13), 3266489909)),
+        ((e ^= e >>> 16) >>> 0) / 45e8
+      );
+    };
+  }
 var pSBC = (p, c0, c1, l) => {
     let r, g, b, P, f, t, h, i = parseInt,
         m = Math.round,

@@ -90,6 +90,7 @@ var buildDefaultProps = {
 
     autoShoot: false,
     bot:false,
+    basicBotRun:true,
 
     teamPenetration:1,
 

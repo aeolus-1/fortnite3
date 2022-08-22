@@ -2,6 +2,27 @@ var bots = {
     classRammer(mob) {
 
     },
+    allAi(mob) {
+        if (mob.closestFriend) {
+            var smol = {dst:Infinity,en:undefined}
+            for (let i = 0; i < mob.closestFriend.length; i++) {
+                const fri = mob.closestFriend[i];
+                var dst = getDistance(fri.pos, mob.pos)
+                if (dst < smol.dst) {
+                    smol.dst = dst
+                    smol.en = fri
+                }
+            }
+            if (smol.en != undefined) {
+                var dst = getDistance(smol.en.pos, mob.pos)
+                if (dst < 50) {
+                    //mob.bot.movingDirection = getAngle(smol.en.pos, mob.pos)+(Math.PI*0.5)
+                    mob.bot.movingStrength = 1
+                    console.log("awaya")
+                }
+            }
+        }
+    },
     basic(mob) {
         if (mob.closestEnemyPlayer != undefined){
 
@@ -51,6 +72,7 @@ var bots = {
             Bot.moveToAverage(mob)
 
         }
+        
 
         //console.log(mob.bot.movingDirection)
     },
@@ -145,6 +167,39 @@ var bots = {
 
 
         
+    },
+
+    motherShipHeals(mob) {
+
+        
+        if (mob.team == "#ff0") console.log(hash)
+        
+        if (mob.closestFriend) {
+            var lowestHealth = {en:undefined,health:Infinity}
+            for (let i = 0; i < mob.closestFriend.length; i++) {
+                const fri = mob.closestFriend[i];
+                if (fri.id != mob.id) {
+                    var date = Math.floor(new Date().getTime()/5000),
+                        hash = (xmur3(`${date}-${mob.id}-${fri.id}`)()*200)-100
+
+                    var friHealth = fri.build.health/fri.build.maxHealth
+                    if (friHealth < lowestHealth.health+hash) {
+                        lowestHealth.en = fri
+                        lowestHealth.health = friHealth
+                    }
+                }
+            }
+            if (lowestHealth.en && lowestHealth.health < 0.9) {
+                var dst = getDistance(lowestHealth.en.pos, mob.pos)
+                if (dst > 150) {
+                    mob.bot.movingDirection = getAngle(lowestHealth.en.pos, mob.pos)//+(Math.PI)
+                    mob.bot.movingStrength = 1
+                }
+                Mob.setAngle(mob, getAngle(lowestHealth.en.pos, mob.pos))
+                Tank.shoot(mob)
+
+            }
+        }
     },
 
 

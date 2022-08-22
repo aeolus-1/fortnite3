@@ -394,17 +394,19 @@ var Mob = {
             if (mob.bot.active) {
                 //console.log(mob.build.name)
                 if (mob.build.guns.length != 0) {
-                    bots["basic"](mob);
+                    if (mob.build.basicBotRun) bots["basic"](mob);
 
                 }
                 if (bots[mob.build.name] != undefined) {
                     bots[mob.build.name](mob);
                 } 
+                bots.allAi(mob)
+
             }
             if (mob.bot.active && mob.build.drone) {
                 var dst = getDistance(mob.pos, mob.shotBy.pos);
                 //console.log(dst)
-                if (dst > 400) {
+                if (dst > 450) {
                     mob.bot.movingStrength = 1;
                     mob.bot.movingDirection = getAngle(mob.pos, mob.shotBy.pos) + Math.PI;
                 }

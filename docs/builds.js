@@ -1,58 +1,52 @@
 var effects = {
     /*
-    speed: 1,
-    slow: 1,
-    damage: 0,
-    heal: 0,
-    duration: 1000,
-    shield: 1,
-    weaken: 1,
-    freeze: 1,
-    stun: false,
-    id: 1,
-    stacks: false,
-    targetsEnemy: true,
-    
-    */
+      speed: 1,
+      slow: 1,
+      damage: 0,
+      heal: 0,
+      duration: 1000,
+      shield: 1,
+      weaken: 1,
+      freeze: 1,
+      stun: false,
+      id: 1,
+      stacks: false,
+      targetsEnemy: true,
+      
+      */
     immuneShield: {
-        id:"immuneShield",
+        id: "immuneShield",
 
         shield: 0,
         duration: 500,
         targetsEnemy: true,
     },
     speedSpeed: {
-        id:"speedSpeed",
+        id: "speedSpeed",
 
         speed: 1.2,
-        duration:1500,
-        targetsEnemy:false,
-        stacks:true,
+        duration: 1500,
+        targetsEnemy: false,
+        stacks: true,
     },
 
     toxicPosion: {
-        id:"toxicPosion",
+        id: "toxicPosion",
 
         damage: 0.0225,
         duration: 583,
         targetsEnemy: true,
-
-
     },
     injectionPosion: {
-        id:"injectionPosion",
-
+        id: "injectionPosion",
 
         damage: 0.004,
         duration: 400,
         stacks: true,
         targetsEnemy: true,
-
-
     },
     healsHeal: {
-        id:"healsHeal",
-        
+        id: "healsHeal",
 
         damage: -0.4,
 
@@ -60,8 +54,7 @@ var effects = {
         targetsEnemy: false,
     },
     healsShield: {
-        id:"healsShield",
-
+        id: "healsShield",
 
         shield: 0.2,
 
@@ -69,56 +62,47 @@ var effects = {
         targetsEnemy: false,
     },
     boosterSlow: {
-        id:"boosterSlow",
-
+        id: "boosterSlow",
 
         slow: 0.8,
 
         duration: 600,
         targetsEnemy: true,
-
     },
     spreadSlow: {
-        id:"spreadSlow",
+        id: "spreadSlow",
 
         slow: 0.8,
 
         duration: 1000,
         targetsEnemy: true,
-
     },
     tankWeaken: {
-        id:"tankWeaken",
-
+        id: "tankWeaken",
 
         weaken: 0.75,
         duration: 1800,
         targetsEnemy: true,
-
     },
     carrionFreeze: {
-        id:"carrionFreeze",
+        id: "carrionFreeze",
 
         freeze: 1.5,
         duration: 1000,
         targetsEnemy: true,
-
     },
     shockyStun: {
-        id:"shockyStun",
+        id: "shockyStun",
 
         stun: true,
         duration: 200,
         targetsEnemy: true,
-
     },
-
-}
-
+};
 
 var builds = {
     starter: {
-        name:"starter",
+        name: "starter",
         health: 130,
         speed: 0.9,
         size: 15,
@@ -127,7 +111,7 @@ var builds = {
         duration: Infinity,
         friction: 0.98,
         sight: 600,
-        range:100,
+        range: 100,
         guns: [
             {
                 pos: 0,
@@ -140,16 +124,16 @@ var builds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -164,28 +148,26 @@ var builds = {
                         sight: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
-}
+};
 
 var badBuilds = {
-    
     port_a_fort: {
-        name:"port_a_fort",
+        name: "port_a_fort",
         health: 60,
         speed: 0.7,
         size: 20,
@@ -221,16 +203,16 @@ var badBuilds = {
                             bullet: {
                                 pos: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 vel: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 rotation: 0,
                                 target: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 alive: true,
                                 build: {
@@ -243,23 +225,23 @@ var badBuilds = {
                                     friction: 0.9,
                                     baseValue: 0,
                                     sight: 0,
-                                    teamPenetration:0,
-                                    
+                                    teamPenetration: 0,
+
                                     exploding: {
                                         strength: 1,
                                         bullet: {
                                             pos: {
                                                 x: 0,
-                                                y: 0
+                                                y: 0,
                                             },
                                             vel: {
                                                 x: 0,
-                                                y: 0
+                                                y: 0,
                                             },
                                             rotation: 0,
                                             target: {
                                                 x: 0,
-                                                y: 0
+                                                y: 0,
                                             },
                                             alive: true,
                                             build: {
@@ -276,47 +258,44 @@ var badBuilds = {
                                                 static: true,
                                                 sight: 0,
 
-                                                teamPenetration:0,
+                                                teamPenetration: 0,
 
                                                 guns: [],
 
                                                 CONFIG: {
-                                                    showHealthBar: false
-                                                }
+                                                    showHealthBar: false,
+                                                },
                                             },
                                             autoSpin: false,
                                             autoShoot: false,
-                                            bot: false
-
-                                        }
+                                            bot: false,
+                                        },
                                     },
                                     guns: [],
 
                                     CONFIG: {
-                                        showHealthBar: false
-                                    }
+                                        showHealthBar: false,
+                                    },
                                 },
                                 autoSpin: false,
                                 autoShoot: false,
-                                bot: false
-
-                            }
+                                bot: false,
+                            },
                         },
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: true,
                     bot: false,
-
                 },
                 recoilVel: 0,
                 autoShoot: false,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
-            
+
             {
                 pos: 0,
                 height: 10,
@@ -328,16 +307,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -351,27 +330,25 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
 
-
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
                 autoShoot: true,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     flameThrower: {
-        name:"flameThrower",
+        name: "flameThrower",
         health: 100,
         speed: 0.83,
         size: 15,
@@ -393,16 +370,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -416,28 +393,27 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
-                        penetration:0.01,
+                        penetration: 0.01,
 
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     starter: {
-        name:"starter",
+        name: "starter",
         health: 130,
         speed: 0.9,
         size: 15,
@@ -458,16 +434,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -482,24 +458,23 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     destroyer: {
-        name:"destroyer",
+        name: "destroyer",
         health: 350,
         speed: 0.93,
         size: 20,
@@ -509,16 +484,13 @@ var badBuilds = {
         friction: 0.98,
         sight: 600,
         range: 0,
-        guns: [
-
-        ],
+        guns: [],
         CONFIG: {
-            showHealthBar: true
-        }
-
+            showHealthBar: true,
+        },
     },
     drone: {
-        name:"drone",
+        name: "drone",
         health: 90,
         speed: 0.8,
         size: 15,
@@ -527,7 +499,7 @@ var badBuilds = {
         duration: Infinity,
         friction: 0.98,
         sight: 1000,
-        droneCap:10,
+        droneCap: 10,
         guns: [
             {
                 pos: 90,
@@ -540,16 +512,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -561,22 +533,21 @@ var badBuilds = {
                         duration: 9999999,
                         friction: 0.985,
                         baseValue: 0,
-                        shape:3,
+                        shape: 3,
                         sight: 0,
                         guns: [],
                         drone: true,
-                        teamPenetration:0.5,
+                        teamPenetration: 0.5,
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
 
                     autoShoot: true,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 270,
@@ -586,20 +557,20 @@ var badBuilds = {
                 speed: 1200,
                 spread: 3,
                 recoilMod: 1,
-                rmb:true,
+                rmb: true,
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -620,16 +591,16 @@ var badBuilds = {
                             bullet: {
                                 pos: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 vel: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 rotation: 0,
                                 target: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 alive: true,
                                 build: {
@@ -644,38 +615,34 @@ var badBuilds = {
                                     sight: 0,
                                     guns: [],
                                     CONFIG: {
-                                        showHealthBar: false
-                                    }
+                                        showHealthBar: false,
+                                    },
                                 },
                                 autoSpin: false,
                                 autoShoot: false,
-                                bot: false
-
-                            }
+                                bot: false,
+                            },
                         },
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
 
                     autoShoot: true,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
+            showHealthBar: true,
         },
         autoSpin: true,
         autoShoot: true,
-
-
     },
     manager: {
-        name:"manager",
+        name: "manager",
         health: 60,
         speed: 0.75,
         size: 15,
@@ -684,9 +651,9 @@ var badBuilds = {
         duration: Infinity,
         friction: 0.98,
         sight: 1500,
-        range:1500,
-        droneCap:5,
-        invisDur:500,
+        range: 1500,
+        droneCap: 5,
+        invisDur: 500,
         guns: [
             {
                 pos: 90,
@@ -699,16 +666,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -723,19 +690,18 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         drone: true,
-                        teamPenetration:0.5,
+                        teamPenetration: 0.5,
 
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
 
                     autoShoot: true,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 270,
@@ -748,16 +714,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -773,30 +739,27 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         drone: true,
-                        teamPenetration:0.5,
+                        teamPenetration: 0.5,
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
 
                     autoShoot: true,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
+            showHealthBar: true,
         },
         autoSpin: true,
         autoShoot: true,
-
-
     },
     overseer: {
-        name:"overseer",
+        name: "overseer",
         health: 100,
         speed: 0.8,
         size: 15,
@@ -819,16 +782,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -844,29 +807,25 @@ var badBuilds = {
                         guns: [],
                         drone: true,
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
 
                     autoShoot: true,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
-
         ],
         CONFIG: {
-            showHealthBar: true
+            showHealthBar: true,
         },
         autoSpin: true,
         autoShoot: true,
-
-
     },
     octo: {
-        name:"octo",
+        name: "octo",
         health: 130,
         speed: 0.65,
         size: 15,
@@ -874,7 +833,7 @@ var badBuilds = {
         bodyDamage: 0.9,
         duration: Infinity,
         friction: 0.98,
-        sight: 600,
+        sight: 900,
         damageMod: 0.85,
         droneCap: Infinity,
         guns: [
@@ -889,16 +848,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -908,24 +867,23 @@ var badBuilds = {
                         maxHealth: 3,
                         bodyDamage: 2,
                         duration: 200,
-                        shape:3,
+                        shape: 3,
                         friction: 0.95,
                         baseValue: 0,
                         sight: 0,
                         drone: true,
-                        teamPenetration:0,
+                        teamPenetration: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 300,
@@ -938,16 +896,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -958,23 +916,22 @@ var badBuilds = {
                         bodyDamage: 3,
                         duration: 200,
                         friction: 0.95,
-                        shape:3,
+                        shape: 3,
                         baseValue: 0,
                         sight: 0,
                         drone: true,
-                        teamPenetration:0,
+                        teamPenetration: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 60,
@@ -987,16 +944,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1007,23 +964,22 @@ var badBuilds = {
                         bodyDamage: 2,
                         duration: 200,
                         friction: 0.95,
-                        shape:3,
+                        shape: 3,
                         baseValue: 0,
                         sight: 0,
                         drone: true,
-                        teamPenetration:0,
+                        teamPenetration: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 180,
@@ -1033,20 +989,20 @@ var badBuilds = {
                 speed: 500,
                 spread: 3,
                 recoilMod: 1,
-                rmb:true,
+                rmb: true,
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1059,9 +1015,9 @@ var badBuilds = {
                         friction: 0.95,
                         baseValue: 0,
                         sight: 0,
-                        autoShoot:true,
-                        autoSpin:true,
-                        
+                        autoShoot: true,
+                        autoSpin: true,
+
                         guns: [
                             {
                                 pos: 180,
@@ -1074,16 +1030,16 @@ var badBuilds = {
                                 bullet: {
                                     pos: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     vel: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     rotation: 0,
                                     target: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     alive: true,
                                     build: {
@@ -1097,45 +1053,39 @@ var badBuilds = {
                                         baseValue: 0,
                                         sight: 1000,
 
-                                        seeking:true,
-                                        
+                                        seeking: true,
+
                                         guns: [],
                                         CONFIG: {
-                                            showHealthBar: false
-                                        }
+                                            showHealthBar: false,
+                                        },
                                     },
                                     autoSpin: false,
                                     autoShoot: false,
-                                    bot: false
-                
+                                    bot: false,
                                 },
                                 recoilVel: 0,
-                                shootCooldown: 0
+                                shootCooldown: 0,
                             },
                         ],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
-            
-
-
-
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     gunner: {
-        name:"gunner",
+        name: "gunner",
         health: 100,
         speed: 0.8,
         size: 15,
@@ -1156,16 +1106,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1181,24 +1131,23 @@ var badBuilds = {
                         seeking: false,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     flank: {
-        name:"flank",
+        name: "flank",
         health: 100,
         speed: 1,
         size: 15,
@@ -1219,16 +1168,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1244,16 +1193,15 @@ var badBuilds = {
                         seeking: false,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -90,
@@ -1266,16 +1214,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1291,16 +1239,15 @@ var badBuilds = {
                         seeking: false,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 90,
@@ -1313,16 +1260,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1338,24 +1285,23 @@ var badBuilds = {
                         seeking: false,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     spread: {
-        name:"spread",
+        name: "spread",
         health: 130,
         speed: 0.805,
         size: 15,
@@ -1378,16 +1324,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1404,16 +1350,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 5,
@@ -1426,16 +1371,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1452,16 +1397,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -10,
@@ -1474,16 +1418,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1500,16 +1444,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -5,
@@ -1522,16 +1465,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1548,16 +1491,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 10,
@@ -1570,16 +1512,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1596,24 +1538,23 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     jumper: {
-        name:"jumper",
+        name: "jumper",
         health: 140,
         speed: 0.6,
         size: 15,
@@ -1636,16 +1577,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1662,16 +1603,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 5,
@@ -1684,16 +1624,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1710,16 +1650,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -10,
@@ -1732,16 +1671,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1758,16 +1697,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -5,
@@ -1780,16 +1718,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1806,16 +1744,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 10,
@@ -1828,16 +1765,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1854,16 +1791,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.spreadSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 180,
@@ -1877,16 +1813,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1902,25 +1838,23 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.tankWeaken],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
-
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     booster: {
-        name:"booster",
+        name: "booster",
         health: 130,
         speed: 1,
         size: 15,
@@ -1942,16 +1876,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -1968,16 +1902,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.boosterSlow],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 180,
@@ -1990,16 +1923,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -2015,16 +1948,15 @@ var badBuilds = {
                         seeking: false,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 210,
@@ -2037,16 +1969,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -2062,16 +1994,15 @@ var badBuilds = {
                         seeking: false,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 150,
@@ -2084,16 +2015,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -2109,185 +2040,179 @@ var badBuilds = {
                         seeking: false,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
-            
-
         ],
         CONFIG: {
-            showHealthBar: true
-        }
-
-
-
+            showHealthBar: true,
+        },
     },
     /*
-    turret: {
-        name:"turret",
-        health: 200,
-        speed: 0.8,
-        size: 15,
-        maxHealth: 200,
-        bodyDamage: 1.5,
-        duration: Infinity,
-        friction: 0.98,
-        sight: 600,
-        guns: [
-            {
-                pos: 0,
-                height: 15,
-                ogLength: 0,
-                width: 8,
-                speed: 100,
-                spread: 3,
-                recoilMod: 1,
-                bullet: {
-                    pos: {
-                        x: 0,
-                        y: 0
-                    },
-                    vel: {
-                        x: 0,
-                        y: 0
-                    },
-                    rotation: 0,
-                    target: {
-                        x: 0,
-                        y: 0
-                    },
-                    alive: true,
-                    build: {
-                        health: 140,
-                        speed: 2.5,
-                        size: 5,
-                        maxHealth: 140,
-                        bodyDamage: 3,
-                        duration: 1000,
-                        friction: 0.98,
-                        baseValue: 0,
-                        sight: 0,
-                        guns: [],
-                        CONFIG: {
-                            showHealthBar: false
-                        }
-                    },
-                    autoSpin: false,
-                    autoShoot: false,
-                    bot: false,
-
-                },
-                recoilVel: 0,
-                shootCooldown: 0
-            },
-            {
-                pos: 120,
-                height: 15,
-                ogLength: 0,
-                width: 8,
-                speed: 100,
-                spread: 3,
-                recoilMod: 1,
-                bullet: {
-                    pos: {
-                        x: 0,
-                        y: 0
-                    },
-                    vel: {
-                        x: 0,
-                        y: 0
-                    },
-                    rotation: 0,
-                    target: {
-                        x: 0,
-                        y: 0
-                    },
-                    alive: true,
-                    build: {
-                        health: 140,
-                        speed: 2.5,
-                        size: 5,
-                        maxHealth: 140,
-                        bodyDamage: 3,
-                        duration: 1000,
-                        friction: 0.98,
-                        baseValue: 0,
-                        sight: 0,
-                        guns: [],
-                        CONFIG: {
-                            showHealthBar: false
-                        }
-                    },
-                    autoSpin: false,
-                    autoShoot: false,
-                    bot: false,
-
-                },
-                recoilVel: 0,
-                shootCooldown: 0
-            },
-            {
-                pos: 240,
-                height: 15,
-                ogLength: 0,
-                width: 8,
-                speed: 100,
-                spread: 3,
-                recoilMod: 1,
-                bullet: {
-                    pos: {
-                        x: 0,
-                        y: 0
-                    },
-                    vel: {
-                        x: 0,
-                        y: 0
-                    },
-                    rotation: 0,
-                    target: {
-                        x: 0,
-                        y: 0
-                    },
-                    alive: true,
-                    build: {
-                        health: 140,
-                        speed: 2.5,
-                        size: 5,
-                        maxHealth: 140,
-                        bodyDamage: 3,
-                        duration: 1000,
-                        friction: 0.98,
-                        baseValue: 0,
-                        sight: 0,
-                        guns: [],
-                        CONFIG: {
-                            showHealthBar: false
-                        }
-                    },
-                    autoSpin: false,
-                    autoShoot: false,
-                    bot: false,
-
-                },
-                recoilVel: 0,
-                shootCooldown: 0
-            }
-
-        ],
-        CONFIG: {
-            showHealthBar: true
-        }
-    },*/
+      turret: {
+          name:"turret",
+          health: 200,
+          speed: 0.8,
+          size: 15,
+          maxHealth: 200,
+          bodyDamage: 1.5,
+          duration: Infinity,
+          friction: 0.98,
+          sight: 600,
+          guns: [
+              {
+                  pos: 0,
+                  height: 15,
+                  ogLength: 0,
+                  width: 8,
+                  speed: 100,
+                  spread: 3,
+                  recoilMod: 1,
+                  bullet: {
+                      pos: {
+                          x: 0,
+                          y: 0
+                      },
+                      vel: {
+                          x: 0,
+                          y: 0
+                      },
+                      rotation: 0,
+                      target: {
+                          x: 0,
+                          y: 0
+                      },
+                      alive: true,
+                      build: {
+                          health: 140,
+                          speed: 2.5,
+                          size: 5,
+                          maxHealth: 140,
+                          bodyDamage: 3,
+                          duration: 1000,
+                          friction: 0.98,
+                          baseValue: 0,
+                          sight: 0,
+                          guns: [],
+                          CONFIG: {
+                              showHealthBar: false
+                          }
+                      },
+                      autoSpin: false,
+                      autoShoot: false,
+                      bot: false,
+  
+                  },
+                  recoilVel: 0,
+                  shootCooldown: 0
+              },
+              {
+                  pos: 120,
+                  height: 15,
+                  ogLength: 0,
+                  width: 8,
+                  speed: 100,
+                  spread: 3,
+                  recoilMod: 1,
+                  bullet: {
+                      pos: {
+                          x: 0,
+                          y: 0
+                      },
+                      vel: {
+                          x: 0,
+                          y: 0
+                      },
+                      rotation: 0,
+                      target: {
+                          x: 0,
+                          y: 0
+                      },
+                      alive: true,
+                      build: {
+                          health: 140,
+                          speed: 2.5,
+                          size: 5,
+                          maxHealth: 140,
+                          bodyDamage: 3,
+                          duration: 1000,
+                          friction: 0.98,
+                          baseValue: 0,
+                          sight: 0,
+                          guns: [],
+                          CONFIG: {
+                              showHealthBar: false
+                          }
+                      },
+                      autoSpin: false,
+                      autoShoot: false,
+                      bot: false,
+  
+                  },
+                  recoilVel: 0,
+                  shootCooldown: 0
+              },
+              {
+                  pos: 240,
+                  height: 15,
+                  ogLength: 0,
+                  width: 8,
+                  speed: 100,
+                  spread: 3,
+                  recoilMod: 1,
+                  bullet: {
+                      pos: {
+                          x: 0,
+                          y: 0
+                      },
+                      vel: {
+                          x: 0,
+                          y: 0
+                      },
+                      rotation: 0,
+                      target: {
+                          x: 0,
+                          y: 0
+                      },
+                      alive: true,
+                      build: {
+                          health: 140,
+                          speed: 2.5,
+                          size: 5,
+                          maxHealth: 140,
+                          bodyDamage: 3,
+                          duration: 1000,
+                          friction: 0.98,
+                          baseValue: 0,
+                          sight: 0,
+                          guns: [],
+                          CONFIG: {
+                              showHealthBar: false
+                          }
+                      },
+                      autoSpin: false,
+                      autoShoot: false,
+                      bot: false,
+  
+                  },
+                  recoilVel: 0,
+                  shootCooldown: 0
+              }
+  
+          ],
+          CONFIG: {
+              showHealthBar: true
+          }
+      },*/
     sniper: {
-        name:"sniper",
+        name: "sniper",
         health: 60,
         speed: 0.8,
         size: 15,
@@ -2308,16 +2233,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -2331,31 +2256,30 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     rocketeer: {
-        name:"rocketeer",
+        name: "rocketeer",
         health: 60,
         speed: 0.75,
         size: 15,
         maxHealth: 60,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.5,
+        friction: 0.98,
         sight: 1000,
         guns: [
             {
@@ -2363,26 +2287,26 @@ var badBuilds = {
                 height: 30,
                 ogLength: 0,
                 width: 14,
-                speed: 300,
+                speed: 200,
                 spread: 0,
-                recoilMod: 30,
+                recoilMod: 15,
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
-                        health: 1,
+                        health: 15,
                         speed: 15,
                         size: 9,
                         maxHealth: 3,
@@ -2398,16 +2322,16 @@ var badBuilds = {
                             bullet: {
                                 pos: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 vel: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 rotation: 0,
                                 target: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 alive: true,
                                 build: {
@@ -2422,14 +2346,13 @@ var badBuilds = {
                                     sight: 0,
                                     guns: [],
                                     CONFIG: {
-                                        showHealthBar: false
-                                    }
+                                        showHealthBar: false,
+                                    },
                                 },
                                 autoSpin: false,
                                 autoShoot: false,
-                                bot: false
-
-                            }
+                                bot: false,
+                            },
                         },
                         guns: [
                             {
@@ -2437,22 +2360,22 @@ var badBuilds = {
                                 height: 7,
                                 ogLength: 0,
                                 width: 12,
-                                speed: 1000,
+                                speed: 7,
                                 spread: 15,
                                 recoilMod: 0,
                                 bullet: {
                                     pos: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     vel: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     rotation: 0,
                                     target: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     alive: true,
                                     build: {
@@ -2461,43 +2384,40 @@ var badBuilds = {
                                         size: 5.5,
                                         maxHealth: 3,
                                         bodyDamage: 3,
-                                        duration: 40,
+                                        duration: 30,
                                         friction: 1,
                                         baseValue: 0,
                                         sight: 0,
                                         guns: [],
                                         autoShoot: true,
                                         CONFIG: {
-                                            showHealthBar: false
-                                        }
+                                            showHealthBar: false,
+                                        },
                                     },
                                     autoSpin: false,
                                     bot: false,
-
                                 },
                                 recoilVel: 0,
-                                shootCooldown: 10
+                                shootCooldown: 10,
                             },
-                            
                         ],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     spiral: {
-        name:"spiral",
+        name: "spiral",
         health: 60,
         speed: 0.8,
         size: 15,
@@ -2518,16 +2438,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -2541,7 +2461,7 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 600,
                         autoShoot: true,
-                        autoSpin:true,
+                        autoSpin: true,
                         guns: [
                             {
                                 pos: 0,
@@ -2554,16 +2474,16 @@ var badBuilds = {
                                 bullet: {
                                     pos: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     vel: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     rotation: 0,
                                     target: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     alive: true,
                                     build: {
@@ -2579,16 +2499,15 @@ var badBuilds = {
                                         sight: 0,
                                         guns: [],
                                         CONFIG: {
-                                            showHealthBar: false
-                                        }
+                                            showHealthBar: false,
+                                        },
                                     },
                                     autoSpin: false,
                                     autoShoot: false,
                                     bot: false,
-
                                 },
                                 recoilVel: 0,
-                                shootCooldown: 0
+                                shootCooldown: 0,
                             },
                             {
                                 pos: 270,
@@ -2601,16 +2520,16 @@ var badBuilds = {
                                 bullet: {
                                     pos: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     vel: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     rotation: 0,
                                     target: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     alive: true,
                                     build: {
@@ -2626,16 +2545,15 @@ var badBuilds = {
                                         sight: 0,
                                         guns: [],
                                         CONFIG: {
-                                            showHealthBar: false
-                                        }
+                                            showHealthBar: false,
+                                        },
                                     },
                                     autoSpin: false,
                                     autoShoot: false,
                                     bot: false,
-
                                 },
                                 recoilVel: 0,
-                                shootCooldown: 0
+                                shootCooldown: 0,
                             },
                             {
                                 pos: 180,
@@ -2648,16 +2566,16 @@ var badBuilds = {
                                 bullet: {
                                     pos: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     vel: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     rotation: 0,
                                     target: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     alive: true,
                                     build: {
@@ -2673,16 +2591,15 @@ var badBuilds = {
                                         sight: 0,
                                         guns: [],
                                         CONFIG: {
-                                            showHealthBar: false
-                                        }
+                                            showHealthBar: false,
+                                        },
                                     },
                                     autoSpin: false,
                                     autoShoot: false,
                                     bot: false,
-
                                 },
                                 recoilVel: 0,
-                                shootCooldown: 0
+                                shootCooldown: 0,
                             },
                             {
                                 pos: 90,
@@ -2695,16 +2612,16 @@ var badBuilds = {
                                 bullet: {
                                     pos: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     vel: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     rotation: 0,
                                     target: {
                                         x: 0,
-                                        y: 0
+                                        y: 0,
                                     },
                                     alive: true,
                                     build: {
@@ -2720,42 +2637,36 @@ var badBuilds = {
                                         sight: 0,
                                         guns: [],
                                         CONFIG: {
-                                            showHealthBar: false
-                                        }
+                                            showHealthBar: false,
+                                        },
                                     },
                                     autoSpin: false,
                                     autoShoot: false,
                                     bot: false,
-
                                 },
                                 recoilVel: 0,
-                                shootCooldown: 0
+                                shootCooldown: 0,
                             },
-
-
-
                         ],
                         CONFIG: {
-                            showHealthBar: true
-                        }
+                            showHealthBar: true,
+                        },
                     },
-
 
                     autoShoot: true,
                     bot: false,
-
                 },
                 recoilVel: 0,
 
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     tank: {
-        name:"tank",
+        name: "tank",
         health: 100,
         speed: 0.8,
         size: 17,
@@ -2776,16 +2687,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -2801,24 +2712,23 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.tankWeaken],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     bigTank: {
-        name:"bigTank",
+        name: "bigTank",
         health: 100,
         speed: 0.8,
         size: 20,
@@ -2839,16 +2749,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -2864,24 +2774,23 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.tankWeaken],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     seekerTank: {
-        name:"seekerTank",
+        name: "seekerTank",
         health: 100,
         speed: 0.8,
         size: 17,
@@ -2902,16 +2811,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -2928,24 +2837,23 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.tankWeaken],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     mine: {
-        name:"mine",
+        name: "mine",
         health: 90,
         speed: 0.8,
         size: 15,
@@ -2955,7 +2863,7 @@ var badBuilds = {
         friction: 0.98,
         sight: 700,
         range: 0,
-        droneCap:1,
+        droneCap: 1,
         guns: [
             {
                 pos: 0,
@@ -2968,20 +2876,19 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
-                        
                         health: 1,
                         speed: 8,
                         size: 9,
@@ -2996,16 +2903,16 @@ var badBuilds = {
                             bullet: {
                                 pos: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 vel: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 rotation: 0,
                                 target: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 alive: true,
                                 build: {
@@ -3020,29 +2927,25 @@ var badBuilds = {
                                     sight: 0,
                                     guns: [],
                                     CONFIG: {
-                                        showHealthBar: false
-                                    }
+                                        showHealthBar: false,
+                                    },
                                 },
                                 autoSpin: false,
                                 autoShoot: false,
-                                bot: false
-
-                            }
+                                bot: false,
+                            },
                         },
-                        guns: [
-
-                        ],
+                        guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: true,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 180,
@@ -3052,20 +2955,20 @@ var badBuilds = {
                 speed: 800,
                 spread: 1,
                 recoilMod: 20,
-                rmb:true,
+                rmb: true,
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3077,23 +2980,23 @@ var badBuilds = {
                         duration: 250,
                         friction: 0.98,
                         baseValue: 0,
-                        drone:true,
+                        drone: true,
                         sight: 0,
                         exploding: {
                             strength: 16,
                             bullet: {
                                 pos: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 vel: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 rotation: 0,
                                 target: {
                                     x: 0,
-                                    y: 0
+                                    y: 0,
                                 },
                                 alive: true,
                                 build: {
@@ -3108,37 +3011,33 @@ var badBuilds = {
                                     sight: 0,
                                     guns: [],
                                     CONFIG: {
-                                        showHealthBar: false
-                                    }
+                                        showHealthBar: false,
+                                    },
                                 },
                                 autoSpin: false,
                                 autoShoot: false,
-                                bot: false
-
-                            }
+                                bot: false,
+                            },
                         },
-                        guns: [
-
-                        ],
+                        guns: [],
                         CONFIG: {
-                            showHealthBar: true
-                        }
+                            showHealthBar: true,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: true,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     heals: {
-        name:"heals",
+        name: "heals",
         health: 100,
         speed: 0.95,
         size: 15,
@@ -3159,16 +3058,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3185,16 +3084,15 @@ var badBuilds = {
                         guns: [],
                         teamAffects: [effects.healsHeal],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 0,
@@ -3207,16 +3105,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3232,24 +3130,23 @@ var badBuilds = {
                         seeking: false,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     toxic: {
-        name:"toxic",
+        name: "toxic",
         health: 120,
         speed: 0.9,
         size: 15,
@@ -3270,16 +3167,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3295,16 +3192,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.toxicPosion],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -15,
@@ -3317,16 +3213,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3342,16 +3238,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.toxicPosion],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 15,
@@ -3364,16 +3259,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3389,24 +3284,23 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.toxicPosion],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     injection: {
-        name:"injection",
+        name: "injection",
         health: 90,
         speed: 0.9,
         size: 15,
@@ -3427,16 +3321,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3452,24 +3346,23 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.injectionPosion],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     carrion: {
-        name:"carrion",
+        name: "carrion",
         health: 100,
         speed: 0.9,
         size: 15,
@@ -3490,16 +3383,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3515,16 +3408,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.carrionFreeze],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -15,
@@ -3537,16 +3429,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3562,16 +3454,15 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.carrionFreeze],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 15,
@@ -3584,16 +3475,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3609,24 +3500,23 @@ var badBuilds = {
                         guns: [],
                         affects: [effects.carrionFreeze],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
-            }
+                shootCooldown: 0,
+            },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     shocky: {
-        name:"shocky",
+        name: "shocky",
         health: 130,
         speed: 0.85,
         size: 15,
@@ -3649,16 +3539,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3675,16 +3565,15 @@ var badBuilds = {
                         guns: [],
                         affects: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 0,
@@ -3698,16 +3587,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3721,20 +3610,19 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
-                        penetration:0,
+                        penetration: 0,
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -10,
@@ -3748,16 +3636,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3771,21 +3659,20 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
-                        penetration:0,
+                        penetration: 0,
 
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: -5,
@@ -3799,16 +3686,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3822,21 +3709,20 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
-                        penetration:0,
+                        penetration: 0,
 
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 5,
@@ -3850,16 +3736,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3873,21 +3759,20 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
-                        penetration:0,
+                        penetration: 0,
 
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 10,
@@ -3901,16 +3786,16 @@ var badBuilds = {
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -3924,31 +3809,28 @@ var badBuilds = {
                         baseValue: 0,
                         sight: 0,
                         seeking: false,
-                        penetration:0,
+                        penetration: 0,
 
                         guns: [],
                         affects: [effects.shockyStun],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
                     bot: false,
-
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
-
-
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
     megaMine: {
-        name:"megaMine",
+        name: "megaMine",
         health: 300,
         speed: 1.2,
         size: 17,
@@ -3959,16 +3841,13 @@ var badBuilds = {
         friction: 0.98,
         sight: 800,
         range: 0,
-        guns: [
-
-        ],
+        guns: [],
         CONFIG: {
-            showHealthBar: true
-        }
-
+            showHealthBar: true,
+        },
     },
     averageJake: {
-        name:"megaMine",
+        name: "averageJake",
         health: 30,
         speed: 1.2,
         size: 17,
@@ -3979,54 +3858,50 @@ var badBuilds = {
         friction: 0.98,
         sight: 800,
         range: 0,
-        guns: [
-
-        ],
-        exploding:{
-            strength:50,
+        guns: [],
+        exploding: {
+            strength: 50,
             bullet: {
                 pos: {
                     x: 0,
-                    y: 0
+                    y: 0,
                 },
                 vel: {
                     x: 0,
-                    y: 0
+                    y: 0,
                 },
                 rotation: 0,
                 target: {
                     x: 0,
-                    y: 0
+                    y: 0,
                 },
                 alive: true,
                 build: {
-                    health: 40,
-                    speed: 4,
+                    health: 30,
+                    speed: 2,
                     size: 5,
                     maxHealth: 4,
-                    bodyDamage: 1.2,
+                    bodyDamage: 5,
                     duration: 300,
                     friction: 1,
                     baseValue: 0,
                     sight: 0,
                     guns: [],
                     CONFIG: {
-                        showHealthBar: false
-                    }
+                        showHealthBar: false,
+                    },
                 },
                 autoSpin: false,
                 autoShoot: false,
-                bot: false
-
-            }
+                bot: false,
+            },
         },
         CONFIG: {
-            showHealthBar: true
-        }
-
+            showHealthBar: true,
+        },
     },
     auto: {
-        name:"auto",
+        name: "auto",
         health: 130,
         speed: 0.9,
         size: 15,
@@ -4044,20 +3919,20 @@ var badBuilds = {
                 speed: 200,
                 spread: 3,
                 recoilMod: 1,
-                auto:true,
+                auto: true,
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -4072,16 +3947,15 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 180,
@@ -4091,20 +3965,20 @@ var badBuilds = {
                 speed: 200,
                 spread: 3,
                 recoilMod: 1,
-                auto:true,
+                auto: true,
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -4119,16 +3993,15 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 90,
@@ -4138,20 +4011,20 @@ var badBuilds = {
                 speed: 200,
                 spread: 3,
                 recoilMod: 1,
-                auto:true,
+                auto: true,
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -4166,16 +4039,15 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
             {
                 pos: 270,
@@ -4185,20 +4057,20 @@ var badBuilds = {
                 speed: 200,
                 spread: 3,
                 recoilMod: 1,
-                auto:true,
+                auto: true,
                 bullet: {
                     pos: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     vel: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     rotation: 0,
                     target: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     alive: true,
                     build: {
@@ -4213,66 +4085,62 @@ var badBuilds = {
                         sight: 0,
                         guns: [],
                         CONFIG: {
-                            showHealthBar: false
-                        }
+                            showHealthBar: false,
+                        },
                     },
                     autoSpin: false,
                     autoShoot: false,
-                    bot: false
-
+                    bot: false,
                 },
                 recoilVel: 0,
-                shootCooldown: 0
+                shootCooldown: 0,
             },
         ],
         CONFIG: {
-            showHealthBar: true
-        }
+            showHealthBar: true,
+        },
     },
-    
+};
 
-}
-
-var bossBuilds = {}
-
+var bossBuilds = {};
 
 let mothershipDroneGun = {
     pos: 0,
     height: 25,
     width: 25,
     spread: 3,
-    speed:700,
+    speed: 700,
     recoilMod: 1,
-    autoShoot:true,
+    autoShoot: true,
     bullet: {
         pos: {
             x: 0,
-            y: 0
+            y: 0,
         },
         vel: {
             x: 0,
-            y: 0
+            y: 0,
         },
         rotation: 0,
         target: {
             x: 0,
-            y: 0
+            y: 0,
         },
         alive: true,
         build: {
-            name:"Mothership Drone",
+            name: "Mothership Drone",
             health: 60,
             speed: 0.5,
             size: 10,
-            shape:8,
+            shape: 8,
             maxHealth: 100,
             bodyDamage: 0.5,
-            duration: 5000,
+            duration: 50000,
             friction: 0.98,
             sight: 1000,
-            range:800,
-            bot:true,
-            drone:true,
+            range: 800,
+            bot: true,
+            drone: true,
 
             guns: [
                 {
@@ -4283,20 +4151,20 @@ let mothershipDroneGun = {
                     speed: 300,
                     spread: 3,
                     recoilMod: 1,
-                    
+
                     bullet: {
                         pos: {
                             x: 0,
-                            y: 0
+                            y: 0,
                         },
                         vel: {
                             x: 0,
-                            y: 0
+                            y: 0,
                         },
                         rotation: 0,
                         target: {
                             x: 0,
-                            y: 0
+                            y: 0,
                         },
                         alive: true,
                         build: {
@@ -4309,33 +4177,31 @@ let mothershipDroneGun = {
                             friction: 1,
                             baseValue: 0,
                             sight: 0,
-                            teamPenetration:0,
+                            teamPenetration: 0,
                             guns: [],
                             CONFIG: {
-                                showHealthBar: false
-                            }
+                                showHealthBar: false,
+                            },
                         },
                         autoSpin: false,
                         autoShoot: false,
-                        bot: false
-
+                        bot: false,
                     },
                     recoilVel: 0,
-                    shootCooldown: 0
-                }
+                    shootCooldown: 0,
+                },
             ],
             CONFIG: {
-                showHealthBar: true
-            }
+                showHealthBar: true,
+            },
         },
         autoSpin: false,
         autoShoot: false,
-        bot: false
-
+        bot: false,
     },
     recoilVel: 0,
-    shootCooldown: 0
-}
+    shootCooldown: 0,
+};
 let mothershipAutoGun = {
     pos: 0,
     height: 30,
@@ -4344,20 +4210,20 @@ let mothershipAutoGun = {
     speed: 48,
     spread: 3,
     recoilMod: 1,
-    auto:true,
+    auto: true,
     bullet: {
         pos: {
             x: 0,
-            y: 0
+            y: 0,
         },
         vel: {
             x: 0,
-            y: 0
+            y: 0,
         },
         rotation: 0,
         target: {
             x: 0,
-            y: 0
+            y: 0,
         },
         alive: true,
         build: {
@@ -4372,123 +4238,191 @@ let mothershipAutoGun = {
             sight: 0,
             guns: [],
             CONFIG: {
-                showHealthBar: false
-            }
+                showHealthBar: false,
+            },
         },
         autoSpin: false,
         autoShoot: true,
-        bot: false
-
+        bot: false,
     },
     recoilVel: 0,
 
-    shootCooldown: 0
-}
+    shootCooldown: 0,
+};
+let motherShipHealDroneGun = {
+    pos: 0,
+    height: 25,
+    width: 25,
+    spread: 3,
+    speed: 1000,
+    recoilMod: 1,
+    autoShoot: true,
+    bullet: {
+        pos: {
+            x: 0,
+            y: 0,
+        },
+        vel: {
+            x: 0,
+            y: 0,
+        },
+        rotation: 0,
+        target: {
+            x: 0,
+            y: 0,
+        },
+        alive: true,
+        build: { 
+            name: "motherShipHeals", 
+            health: 35, 
+            speed: 0.35, 
+            size: 9, 
+            maxHealth: 100, 
+            bodyDamage: 0.5, 
+            duration: 5000, 
+            friction: 0.98, 
+            sight: 600, 
+            range:700,
+            shape: 8, 
+            bot: true, 
+            drone: true, 
+            guns: [
+                { 
+                    pos: 0, 
+                    height: 6, 
+                    ogLength: 0, 
+                    width: 10, 
+                    speed: 35, 
+                    spread: 7, 
+                    recoilMod: 1, 
+                    bullet: { 
+                        alive: true, 
+                        build: { 
+                            health: 0.1, 
+                            speed: 14, 
+                            size: 2, 
+                            maxHealth: 3, 
+                            bodyDamage: 0, 
+                            duration: 80, 
+                            friction: 1, 
+                            baseValue: 0, 
+                            sight: 0, 
+                            seeking: false, 
+                            guns: [], 
+                            teamAffects: [effects.healsHeal], 
+                            CONFIG: { showHealthBar: false, }, 
+                        }, 
+                        autoSpin: false, 
+                        autoShoot: false, 
+                        bot: false, 
+                    }, 
+                    recoilVel: 0, 
+                    shootCooldown: 0, 
+                },
+            ], 
+            CONFIG: { showHealthBar: true, }, },
+        autoSpin: false,
+        autoShoot: false,
+        bot: false,
+    },
+    recoilVel: 0,
+    shootCooldown: 0,
+};
 
 bossBuilds.mothership = {
-        name:"mothership",
-        boss:true,
-        health: 1200,
-        speed: 0.7,
-        size: 60,
-        shape:8,
-        maxHealth: 100,
-        bodyDamage: 0.9,
-        duration: Infinity,
-        friction: 0.98,
-        sight: 1000,
-        range:500,
-        droneCap:7,
-        turningSpeed:0.03,
-        guns: [
-            {
-                pos: 0,
-                height: 20,
-                ogLength: 0,
-                width: 75,
-                speed: 300,
-                spread: 3,
-                recoilMod: 1,
-                bullet: {
-                    pos: {
-                        x: 0,
-                        y: 0
-                    },
-                    vel: {
-                        x: 0,
-                        y: 0
-                    },
-                    rotation: 0,
-                    target: {
-                        x: 0,
-                        y: 0
-                    },
-                    alive: true,
-                    build: {
-                        health: 150,
-                        speed: 6,
-                        size: 30,
-                        bodyDamage: 3.5,
-                        duration: 300,
-                        friction: 1,
-                        baseValue: 0,
-                        sight: 0,
-                        teamPenetration:0,
-                        guns: [],
-                        CONFIG: {
-                            showHealthBar: false
-                        }
-                    },
-                    autoSpin: false,
-                    autoShoot: false,
-                    bot: false
-
+    name: "mothership",
+    boss: true,
+    health: 1900,
+    speed: 0.7,
+    size: 60,
+    shape: 8,
+    maxHealth: 100,
+    bodyDamage: 0.9,
+    duration: Infinity,
+    friction: 0.98,
+    sight: 1000,
+    range: 500,
+    droneCap: 12,
+    turningSpeed: 0.03,
+    guns: [
+        {
+            pos: 0,
+            height: 20,
+            ogLength: 0,
+            width: 75,
+            speed: 300,
+            spread: 3,
+            recoilMod: 1,
+            bullet: {
+                pos: {
+                    x: 0,
+                    y: 0,
                 },
-                recoilVel: 0,
-                shootCooldown: 0
+                vel: {
+                    x: 0,
+                    y: 0,
+                },
+                rotation: 0,
+                target: {
+                    x: 0,
+                    y: 0,
+                },
+                alive: true,
+                build: {
+                    health: 150,
+                    speed: 6,
+                    size: 30,
+                    bodyDamage: 3.5,
+                    duration: 300,
+                    friction: 1,
+                    baseValue: 0,
+                    sight: 0,
+                    teamPenetration: 0,
+                    guns: [],
+                    CONFIG: {
+                        showHealthBar: false,
+                    },
+                },
+                autoSpin: false,
+                autoShoot: false,
+                bot: false,
             },
-            {
-                ...mothershipAutoGun,
-                pos:65,
-            },
-            {
-                ...mothershipAutoGun,
-                pos:-65,
-            },
-            {
-                ...mothershipDroneGun,
-                pos:180,
-                offset:45
-            },
-            {
-                ...mothershipDroneGun,
-                pos:180,
-                offset:-45
-            },
-            {
-                ...mothershipDroneGun,
-                pos:180,
-                offset:15
-            },
-            {
-                ...mothershipDroneGun,
-                pos:180,
-                offset:-15
-            },
-            
-        ],
-        CONFIG: {
-            showHealthBar: true
-        }
-}
-
-
-
-
-
-
-
-
+            recoilVel: 0,
+            shootCooldown: 0,
+        },
+        {
+            ...mothershipAutoGun,
+            pos: 65,
+        },
+        {
+            ...mothershipAutoGun,
+            pos: -65,
+        },
+        {
+            ...motherShipHealDroneGun,
+            pos: 180,
+            offset: 45,
+        },
+        {
+            ...motherShipHealDroneGun,
+            pos: 180,
+            offset: -45,
+        },
+        {
+            ...mothershipDroneGun,
+            pos: 180,
+            offset: 15,
+        },
+        {
+            ...mothershipDroneGun,
+            pos: 180,
+            offset: -15,
+        },
+    ],
+    CONFIG: {
+        showHealthBar: true,
+    },
+};
 
 let gunShipAutoGun = {
     pos: 0,
@@ -4498,20 +4432,20 @@ let gunShipAutoGun = {
     speed: 20,
     spread: 3,
     recoilMod: 0.3,
-    auto:true,
+    auto: true,
     bullet: {
         pos: {
             x: 0,
-            y: 0
+            y: 0,
         },
         vel: {
             x: 0,
-            y: 0
+            y: 0,
         },
         rotation: 0,
         target: {
             x: 0,
-            y: 0
+            y: 0,
         },
         alive: true,
         build: {
@@ -4526,79 +4460,76 @@ let gunShipAutoGun = {
             sight: 0,
             guns: [],
             CONFIG: {
-                showHealthBar: false
-            }
+                showHealthBar: false,
+            },
         },
         autoSpin: false,
         autoShoot: true,
-        bot: false
-
+        bot: false,
     },
     recoilVel: 0,
 
-    shootCooldown: 0
-}
-
+    shootCooldown: 0,
+};
 
 bossBuilds.gunShip = {
-    name:"gunShip",
-    boss:true,
+    name: "gunShip",
+    boss: true,
     health: 2000,
     speed: 0.7,
     size: 60,
-    shape:8,
+    shape: 8,
     maxHealth: 100,
     bodyDamage: 0.9,
     duration: Infinity,
     friction: 0.98,
     sight: 1000,
-    range:200,
-    droneCap:7,
-    turningSpeed:0,
+    range: 200,
+    droneCap: 7,
+    turningSpeed: 0,
     guns: [
         {
             ...gunShipAutoGun,
-            pos:0,
+            pos: 0,
         },
         {
             ...gunShipAutoGun,
-            pos:36,
+            pos: 36,
         },
         {
             ...gunShipAutoGun,
-            pos:72,
+            pos: 72,
         },
         {
             ...gunShipAutoGun,
-            pos:108,
+            pos: 108,
         },
         {
             ...gunShipAutoGun,
-            pos:144,
+            pos: 144,
         },
         {
             ...gunShipAutoGun,
-            pos:180,
+            pos: 180,
         },
         {
             ...gunShipAutoGun,
-            pos:216,
+            pos: 216,
         },
         {
             ...gunShipAutoGun,
-            pos:252,
+            pos: 252,
         },
         {
             ...gunShipAutoGun,
-            pos:288,
+            pos: 288,
         },
         {
             ...gunShipAutoGun,
-            pos:324,
+            pos: 324,
         },
-        
     ],
     CONFIG: {
-        showHealthBar: true
-    }
-}
+        showHealthBar: true,
+    },
+};
