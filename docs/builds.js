@@ -420,7 +420,7 @@ var badBuilds = {
         maxHealth: 100,
         bodyDamage: 0.5,
         duration: Infinity,
-        friction: 0.9,
+        friction: 0.98,
         sight: 600,
         guns: [
             {
@@ -428,7 +428,7 @@ var badBuilds = {
                 height: 17,
                 ogLength: 0,
                 width: 10,
-                speed: 200,
+                speed: 100,
                 spread: 3,
                 recoilMod: 1,
                 bullet: {
@@ -3850,14 +3850,15 @@ var badBuilds = {
         name: "averageJake",
         health: 30,
         speed: 1.2,
-        size: 17,
+        size: 9,
         invisDur: 300,
         maxHealth: 110,
         bodyDamage: 0.1,
         duration: Infinity,
         friction: 0.98,
-        sight: 800,
+        sight: 1200,
         range: 0,
+        shape:7,
         guns: [],
         exploding: {
             strength: 39,
@@ -4211,6 +4212,7 @@ let mothershipAutoGun = {
     spread: 3,
     recoilMod: 1,
     auto: true,
+    rotation:180,
     bullet: {
         pos: {
             x: 0,
@@ -4286,6 +4288,7 @@ let motherShipHealDroneGun = {
             shape: 8, 
             bot: true, 
             drone: true, 
+            basicBotRun:false,
             guns: [
                 { 
                     pos: 0, 

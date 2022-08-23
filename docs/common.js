@@ -29,6 +29,13 @@ function rotate(t, n, e) {
       );
     };
   }
+  function createElementFromHTML(htmlString) {
+    var div = document.createElement('div');
+    div.innerHTML = htmlString.trim();
+
+    // Change this to div.childNodes to support multiple top-level nodes.
+    return div.firstChild;
+}
 var pSBC = (p, c0, c1, l) => {
     let r, g, b, P, f, t, h, i = parseInt,
         m = Math.round,

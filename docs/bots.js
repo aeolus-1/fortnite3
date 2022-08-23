@@ -15,9 +15,8 @@ var bots = {
             }
             if (smol.en != undefined) {
                 var dst = getDistance(smol.en.pos, mob.pos)
-                if (dst < 50) {
-                    //mob.bot.movingDirection = getAngle(smol.en.pos, mob.pos)+(Math.PI*0.5)
-                    mob.bot.movingStrength = 1
+                if (dst < 50 && smol.en.id != mob.id) {
+                    mob.bot.movingDirection = getAngle(smol.en.pos, mob.pos)+(Math.PI*0.5)
                     console.log("awaya")
                 }
             }
@@ -170,11 +169,12 @@ var bots = {
     },
 
     motherShipHeals(mob) {
-
+        
         
         if (mob.team == "#ff0") console.log(hash)
         
         if (mob.closestFriend) {
+            
             var lowestHealth = {en:undefined,health:Infinity}
             for (let i = 0; i < mob.closestFriend.length; i++) {
                 const fri = mob.closestFriend[i];
@@ -183,15 +183,17 @@ var bots = {
                         hash = (xmur3(`${date}-${mob.id}-${fri.id}`)()*200)-100
 
                     var friHealth = fri.build.health/fri.build.maxHealth
-                    if (friHealth < lowestHealth.health+hash) {
+                    if (friHealth < lowestHealth.health) {
                         lowestHealth.en = fri
                         lowestHealth.health = friHealth
                     }
                 }
             }
-            if (lowestHealth.en && lowestHealth.health < 0.9) {
+            if (lowestHealth.en && lowestHealth.health < 0.95) {
+                console.log("yay")
                 var dst = getDistance(lowestHealth.en.pos, mob.pos)
                 if (dst > 150) {
+                    //lowestHealth.en.build.size += 0.05
                     mob.bot.movingDirection = getAngle(lowestHealth.en.pos, mob.pos)//+(Math.PI)
                     mob.bot.movingStrength = 1
                 }

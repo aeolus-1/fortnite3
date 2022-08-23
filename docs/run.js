@@ -17,7 +17,17 @@ function runMobs() {
     var alreadyDone = []
     for (let i = 0; i < loadedMobs.length; i++) {
         let mob = loadedMobs[i];
-        if (!alreadyDone.includes(mob.id)) {
+        if (mob.unload) {
+            if (mob.build.size>0.5) {
+                mob.build.size -= 0.3*deltaTime
+                mob.gameAlpha = clamp(mob.gameAlpha-(0.08*deltaTime), 0, 1)
+            } else {
+                mainChunks.removeMob(mob.chunkPos.x, mob.chunkPos.y, mob)
+                delete mob
+            }
+        }
+        Mob.updateMovement(mob)
+        if (!mob.unload && !alreadyDone.includes(mob.id)) {
         
             Mob.update(mob)
             if (true) {
@@ -31,10 +41,9 @@ function runMobs() {
                 cEnemy = {mob:undefined, dst:Infinity}
                 cEnemyPlayer = {mob:undefined, dst:Infinity}
 
-                if (mob.unload) {
-                    mainChunks.removeMob(mob.chunkPos.x, mob.chunkPos.y, mob)
-                    delete mob
-                } else {
+                if (mob.unload && mob.build.size < 1) {
+                
+                } if (!mob.unload) {
                     for (let i2 = 0; i2 < loadedMobs.length; i2++) {
 
 

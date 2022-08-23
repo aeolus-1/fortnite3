@@ -48,6 +48,7 @@ class mob {
 
         this.invisA = this.build.invisDur;
         this.alpha = 1;
+        this.gameAlpha = 1
 
         this.effects = {};
         this.effectsConfig = {
@@ -63,17 +64,20 @@ class mob {
 var eMob = mob;
 
 var Mob = {
-    update: function (mob) {
-        mob.rotation = stopOverflow(mob.rotation, Math.PI*2)
-        var r = mob.vel.x;
-
+    updateMovement(mob) {
         mob.chunk = mainChunks.requestChunk(mob.chunkPos.x, mob.chunkPos.y);
 
         if (!mob.stunned)
             this.move(
                 mob,
-                v(mob.pos.x + mob.vel.x * deltaTime, mob.pos.y + mob.vel.y * deltaTime)
+                v(mob.pos.x + mob.vel.x * deltaTime*0.5, mob.pos.y + mob.vel.y * deltaTime*0.5)
             );
+    },
+    update: function (mob) {
+        mob.rotation = stopOverflow(mob.rotation, Math.PI*2)
+        var r = mob.vel.x;
+
+        
 
         var f = 1 - (1 - mob.build.friction) * 1.5;
 
@@ -151,7 +155,8 @@ var Mob = {
     damage(mob, damage, shotBy) {
         var h = mob.build.health;
         mob.build.health = clamp(mob.build.health - damage, 0, mob.build.maxHealth);
-        if (h > 0 && mob.build.health <= 0) {
+        
+        if (h > 0 && mob.build.health <= 0 && !mob.unload) {
             if (mob.id == cameraTarget.id) {
                 Chat.submitMsg(`Died by ${shotBy.build.name.toUpperCase()}'s hands`);
                 cameraTarget = shotBy;
@@ -163,6 +168,11 @@ var Mob = {
             if (mob.player && mob.team == player1.team) {
                 Chat.submitMsg(`${mob.build.name.toUpperCase()} was killed`);
             }
+        }
+        if (mob.build.health <= 0) {
+            Mob.kill(mob)
+            mob.unload = true
+            
         }
     },
     setAngle(mob, angle) {
@@ -210,8 +220,9 @@ var Mob = {
                 var a =
                     mob.rotation +
                     (360 / mob.build.exploding.strength) * i * (Math.PI / 180);
-                tbullet.vel.x += (Math.cos(a) * mob.build.exploding.strength)+randInt(-0.1,0.1);
-                tbullet.vel.y += (Math.sin(a) * mob.build.exploding.strength)+randInt(-0.1,0.1);
+                var l = 5
+                tbullet.vel.x += (Math.cos(a) * mob.build.exploding.strength)+randInt(-l,l);
+                tbullet.vel.y += (Math.sin(a) * mob.build.exploding.strength)+randInt(-l,l);
             }
         }
     },
@@ -287,7 +298,7 @@ var Mob = {
         }
 
         ctx.globalAlpha =
-            mob.team == player1.team ? (mob.alpha + 0.2) * 0.8333333333 : mob.alpha;
+            ((mob.team == player1.team) ? (mob.alpha + 0.2) * 0.8333333333 : mob.alpha)*mob.gameAlpha
 
         for (let i = 0; i < mob.build.guns.length; i++) {
             let gun = mob.build.guns[i];
@@ -406,7 +417,7 @@ var Mob = {
             if (mob.bot.active && mob.build.drone) {
                 var dst = getDistance(mob.pos, mob.shotBy.pos);
                 //console.log(dst)
-                if (dst > 450) {
+                if (dst > 300) {
                     mob.bot.movingStrength = 1;
                     mob.bot.movingDirection = getAngle(mob.pos, mob.shotBy.pos) + Math.PI;
                 }
