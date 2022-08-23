@@ -39,9 +39,9 @@ player2.bot.active = true
 players.push(player1)
 //players.push(player2)
 
-//players.push(spawnMob(v(1500,0), bossBuilds.mothership, "#f0f"))
-//genMobs(6, 100, v(1500,0), "#f0f")
+players.push(spawnMob(v(1500,0), bossBuilds.mothership, "#f0f"))
+genMobs(5, 100, v(1500,0), "#f0f")
 
 
 players.push(spawnMob(v(-1500,0), bossBuilds.mothership, "#ff0"))
-//genMobs(1, 100, v(-1500,0), "#ff0")
+genMobs(1, 100, v(-1500,0), "#ff0")
