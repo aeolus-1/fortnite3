@@ -102,7 +102,8 @@ function runMobs() {
 
    
 }
-var respawnTimeout = undefined
+var respawnTimeout = undefined,
+    wave = 0
 
 function checkWaveSpawn() {
 
@@ -111,6 +112,8 @@ function checkWaveSpawn() {
             var enemyMotherShip = spawnMob(v(playerMotherShip.pos.x-1000,playerMotherShip.pos.y), bossBuilds.mothership, "#ff0")
             players.push(enemyMotherShip)
             genMobs(5, 100, v(playerMotherShip.pos.x-1000,playerMotherShip.pos.y), "#ff0", enemyMotherShip)
+            wave++
+            Chat.submitMsg(`Wave ${wave}`)
             setTimeout(()=>{respawnTimeout = undefined},1000)
         }, 4500);
         
@@ -140,7 +143,7 @@ function updateFps() {
     preTime = time
 
 
-    deltaTime = 0.5//Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.5
+    deltaTime = (1/(Math.min(Math.max((fps/framerate), 0.1), 2)))*0.5
 }
 
 var preDim = v(

@@ -504,7 +504,7 @@ var Mob = {
         }
     },
     moveMobiles(mob, angle, strength) {
-        strength = clamp(strength, -1, 1)*(mob.player?2:1)
+        strength = clamp(strength, -1, 1)*(mob.player?0.8:1)
 
         mob.vel.x += Math.cos(angle) * mob.build.speed * 0.2 * deltaTime * strength;
         mob.vel.y += Math.sin(angle) * mob.build.speed * 0.2 * deltaTime * strength;

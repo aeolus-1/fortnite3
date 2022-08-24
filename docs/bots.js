@@ -26,36 +26,39 @@ var bots = {
 
             let dst = getDistance(mob.pos, mob.closestEnemyPlayer.pos)
 
-
-            if (mob.bot.retreat && !mob.boss) {
-                if (mob.home) {
-                    if (getDistance(mob.home.pos, mob.pos) > 250) {
-                        var a = getAngle(mob.home.pos, mob.pos)
-                        mob.bot.movingDirection = a
-                        mob.bot.movingStrength = 1
-                        mob.rotation = a
+            if (mob.home && !mob.home.unload) {
+                if (mob.bot.retreat && !mob.boss) {
+                    if (mob.home) {
+                        if (getDistance(mob.home.pos, mob.pos) > 250) {
+                            var a = getAngle(mob.home.pos, mob.pos)
+                            mob.bot.movingDirection = a
+                            mob.bot.movingStrength = 1
+                            mob.rotation = a
+                        } else {
+                            mob.bot.movingStrength = 0
+                        }
                     } else {
-                        mob.bot.movingStrength = 0
+                        var a = getAngle(mob.closestEnemyPlayer.pos, mob.pos)+Math.PI
+                        mob.bot.movingDirection = a
+                        mob.rotation = a
                     }
-                } else {
-                    var a = getAngle(mob.closestEnemyPlayer.pos, mob.pos)+Math.PI
-                    mob.bot.movingDirection = a
-                    mob.rotation = a
+                    if (mob.build.health/mob.build.maxHealth>0.95&&!mob.boss) {
+                        mob.bot.retreat = false
+                    }
+                } else if (mob.build.health/mob.build.maxHealth<0.45&&!mob.boss) {
+                    mob.bot.retreat = true
+                    
                 }
-                if (mob.build.health/mob.build.maxHealth>0.95&&!mob.boss) {
-                    mob.bot.retreat = false
-                }
-                return 0
-            } else if (mob.build.health/mob.build.maxHealth<0.45&&!mob.boss) {
-                mob.bot.retreat = true
-                
             }
 
             if (dst < mob.build.sight*4) {
                 mob.bot.moving = true
-                mob.bot.movingDirection = getAngle(mob.closestEnemyPlayer.pos, mob.pos)// + (Math.PI*(retreat?1:0))
-                mob.rotation = mob.bot.movingDirection
-                mob.bot.movingStrength = 1
+                if (!mob.bot.retreat) {
+                    mob.bot.movingDirection = getAngle(mob.closestEnemyPlayer.pos, mob.pos)
+                    mob.bot.movingStrength = 1
+
+                }// + (Math.PI*(retreat?1:0))
+                mob.rotation = getAngle(mob.closestEnemyPlayer.pos, mob.pos)
                 
             } 
             var rangeDst = dst-mob.build.range
