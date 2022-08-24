@@ -22,18 +22,19 @@ var Bot = {
         mob.target = {...mob.pos}
 
         let averagePos = v(0,0)
+        var plus = 0
+
         for (let i = 0; i < mob.closestFriend.length; i++) {
             const friend = mob.closestFriend[i];
             averagePos.x += friend.pos.x
             averagePos.y += friend.pos.y
-            if (false && friend.boss) {
-                averagePos.x += friend.pos.x*9
-                averagePos.y += friend.pos.y*9
-                plus += 9
+            if (true && friend.boss && friend.id != mob.id) {
+                averagePos.x += friend.pos.x*10
+                averagePos.y += friend.pos.y*10
+                plus += 10
             }
 
         }
-        var plus = 0
         if (mob.build.drone && mob.bot.active) {
             averagePos.x += mob.shotBy.pos.x*10
             averagePos.y += mob.shotBy.pos.y*10
@@ -47,7 +48,7 @@ var Bot = {
         mob.bot.movingStrength = -1
         mob.bot.movingDirection = getAngle(averagePos, mob.pos)+(Math.PI)
 
-        if (dst < 200) {
+        if (dst < 130) {
             mob.bot.movingStrength = 0
         }
         

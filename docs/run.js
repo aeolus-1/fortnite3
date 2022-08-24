@@ -1,6 +1,9 @@
 var loadedMobs = new Array()
-function runMobs() {
 
+var mobTeamCounts = {}
+
+function runMobs() {
+    mobTeamCounts = {}
     loadedMobs = new Array()
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
@@ -28,7 +31,8 @@ function runMobs() {
         }
         Mob.updateMovement(mob)
         if (!mob.unload && !alreadyDone.includes(mob.id)) {
-        
+            if (mobTeamCounts[mob.team] == undefined) mobTeamCounts[mob.team] = 0
+            mobTeamCounts[mob.team] += 1
             Mob.update(mob)
             if (true) {
                 Mob.runAi(mob)
@@ -50,7 +54,7 @@ function runMobs() {
                         const mob2 = loadedMobs[i2];
 
                         var dst = getDistance(mob2.pos, mob.pos)
-                        if (true) {
+                        if (dst < mob.build.sight*8) {
 
                             if (mob.team == mob2.team && (mob2.player || mob2.bot.active) && dst < Infinity) {
                                 mob.closestFriend.push(mob2)
@@ -98,6 +102,20 @@ function runMobs() {
 
    
 }
+var respawnTimeout = undefined
+
+function checkWaveSpawn() {
+
+    if (mobTeamCounts["#ff0"] == undefined && respawnTimeout == undefined) {
+        respawnTimeout = setTimeout(() => {
+            var enemyMotherShip = spawnMob(v(playerMotherShip.pos.x-1000,playerMotherShip.pos.y), bossBuilds.mothership, "#ff0")
+            players.push(enemyMotherShip)
+            genMobs(5, 100, v(playerMotherShip.pos.x-1000,playerMotherShip.pos.y), "#ff0", enemyMotherShip)
+            setTimeout(()=>{respawnTimeout = undefined},1000)
+        }, 4500);
+        
+    }
+}
 
 var players = new Array()
 
@@ -122,7 +140,7 @@ function updateFps() {
     preTime = time
 
 
-    deltaTime = Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.5
+    deltaTime = 0.5//Math.min(Math.max((fps/framerate), 0.1), 2)*                  0.5
 }
 
 var preDim = v(
@@ -151,6 +169,8 @@ function mainloop() {
     player1.rotation -= clamp((angleDiff(targetA, currentA))*(Math.PI/180)*player1.build.turningSpeed, -1, 1)
 
     player1.target = {...gameMouse}
+
+    checkWaveSpawn()
 
     runKeys()
 

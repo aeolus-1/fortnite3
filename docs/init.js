@@ -4,12 +4,23 @@ for (let i = 0; i < Object.keys(badBuilds).length; i++) {
     text = text + `\n- ${key}`
 }
 
-var cbuild = location.href.split("#")[1]//(prompt(text) || "octo")
-while (badBuilds[cbuild] == undefined) {
+var cbuild = location.href.split("#")[1],
+    buildDat = badBuilds
+
+if (cbuild == undefined) cbuild = "starter"
+if (cbuild[0] == "2") {
+    buildDat = bossBuilds
+    cbuild = cbuild.slice(1,cbuild.length)
+}
+while (buildDat[cbuild] == undefined) {
+
     alert("not an build")
     cbuild = (prompt(text))
 }
-var player1 = new mob(v(1500,150), badBuilds[cbuild])
+
+
+
+var player1 = new mob(v(1500,150), buildDat[cbuild])
     //player2 = new mob(v(2000,0), bossBuilds.mothership)
 
 
@@ -39,9 +50,11 @@ player2.bot.active = true
 players.push(player1)
 //players.push(player2)
 
-players.push(spawnMob(v(1500,0), bossBuilds.mothership, "#f0f"))
-genMobs(5, 100, v(1500,0), "#f0f")
+var playerMotherShip = spawnMob(v(1500,0), bossBuilds.mothership, "#f0f")
+players.push(playerMotherShip)
+genMobs(5, 100, v(1500,0), "#f0f", playerMotherShip)
+
+//var p = spawnMob(v(0,0), badBuilds.booster, "#ff0")
+//p.home = spawnMob(v(0,0), badBuilds.destroyer, "#ff0")
 
 
-players.push(spawnMob(v(-1500,0), bossBuilds.mothership, "#ff0"))
-genMobs(1, 100, v(-1500,0), "#ff0")

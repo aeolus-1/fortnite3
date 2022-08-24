@@ -1,4 +1,4 @@
-function genMobs(num, range=10000, pos=v(0,0), team="#f00") {
+function genMobs(num, range=10000, pos=v(0,0), team="#f00", home=undefined) {
     for (let i = 0; i < num; i++) {
     var range = range
         var a = randInt(0, 360)*(Math.PI/180),//(i/num)*Math.PI*2
@@ -19,8 +19,9 @@ function genMobs(num, range=10000, pos=v(0,0), team="#f00") {
         let m = new mob(rndPos, JSON.parse(JSON.stringify(build)), team)
         m.bot.active = true
         m.player = true
-        //m.build.maxHealth *= 3
-        //m.build.health *= 3
+        m.home = home
+        m.build.maxHealth *= 2
+        m.build.health *= 2
         m.shotBy = m
 
        

@@ -17,7 +17,6 @@ var bots = {
                 var dst = getDistance(smol.en.pos, mob.pos)
                 if (dst < 50 && smol.en.id != mob.id) {
                     mob.bot.movingDirection = getAngle(smol.en.pos, mob.pos)+(Math.PI*0.5)
-                    console.log("awaya")
                 }
             }
         }
@@ -26,10 +25,38 @@ var bots = {
         if (mob.closestEnemyPlayer != undefined){
 
             let dst = getDistance(mob.pos, mob.closestEnemyPlayer.pos)
-            if (dst < Infinity) {
+
+
+            if (mob.bot.retreat && !mob.boss) {
+                if (mob.home) {
+                    if (getDistance(mob.home.pos, mob.pos) > 250) {
+                        var a = getAngle(mob.home.pos, mob.pos)
+                        mob.bot.movingDirection = a
+                        mob.bot.movingStrength = 1
+                        mob.rotation = a
+                    } else {
+                        mob.bot.movingStrength = 0
+                    }
+                } else {
+                    var a = getAngle(mob.closestEnemyPlayer.pos, mob.pos)+Math.PI
+                    mob.bot.movingDirection = a
+                    mob.rotation = a
+                }
+                if (mob.build.health/mob.build.maxHealth>0.95&&!mob.boss) {
+                    mob.bot.retreat = false
+                }
+                return 0
+            } else if (mob.build.health/mob.build.maxHealth<0.45&&!mob.boss) {
+                mob.bot.retreat = true
+                
+            }
+
+            if (dst < mob.build.sight*4) {
                 mob.bot.moving = true
-                mob.bot.movingDirection = getAngle(mob.closestEnemyPlayer.pos, mob.pos)
+                mob.bot.movingDirection = getAngle(mob.closestEnemyPlayer.pos, mob.pos)// + (Math.PI*(retreat?1:0))
+                mob.rotation = mob.bot.movingDirection
                 mob.bot.movingStrength = 1
+                
             } 
             var rangeDst = dst-mob.build.range
             if (Math.abs(rangeDst)> 50) {
@@ -38,7 +65,7 @@ var bots = {
             if (mob.closestEnemy != undefined){
                 if (mob.closestEnemy.id != mob.closestEnemyPlayer.id) {
                     var enDst = getDistance(mob.closestEnemy.pos, mob.pos)
-                    if (enDst < 100) {
+                    if (enDst < 100 && !mob.boss) {
                         mob.bot.movingDirection = getAngle(mob.closestEnemy.pos, mob.pos)+(Math.PI)
                         mob.bot.movingStrength = 1
 
@@ -52,7 +79,6 @@ var bots = {
             var m = 0.5
             let addedVel = v((mob.closestEnemyPlayer.vel.x+mob.vel.x)*m*deltaTime, (mob.closestEnemyPlayer.vel.y+mob.vel.y)*m*deltaTime)
             
-            if (mob.build.guns[0] == undefined) console.log(mob.build)
             let bulletSpeed = mob.build.guns[0].bullet.build.speed*deltaTime
 
             let newPos = Bot.leadMovingTarget(mob.pos, mob.closestEnemyPlayer.pos, addedVel, bulletSpeed)
@@ -105,7 +131,6 @@ var bots = {
                 var m = 0.2
                 let addedVel = v((mob.closestEnemyPlayer.vel.x+mob.vel.x)*m*deltaTime, (mob.closestEnemyPlayer.vel.y+mob.vel.y)*m*deltaTime)
                 
-                if (mob.build.guns[0] == undefined) console.log(mob.build)
                 let bulletSpeed = mob.build.guns[0].bullet.build.speed*deltaTime
 
                 let newPos = Bot.leadMovingTarget(mob.pos, mob.closestEnemyPlayer.pos, addedVel, bulletSpeed)
@@ -171,26 +196,26 @@ var bots = {
     motherShipHeals(mob) {
         
         
-        if (mob.team == "#ff0") console.log(hash)
         
         if (mob.closestFriend) {
             
             var lowestHealth = {en:undefined,health:Infinity}
             for (let i = 0; i < mob.closestFriend.length; i++) {
                 const fri = mob.closestFriend[i];
+
                 if (fri.id != mob.id) {
                     var date = Math.floor(new Date().getTime()/5000),
                         hash = (xmur3(`${date}-${mob.id}-${fri.id}`)()*200)-100
 
                     var friHealth = fri.build.health/fri.build.maxHealth
-                    if (friHealth < lowestHealth.health) {
+
+                    if (friHealth < lowestHealth.health && getDistance(fri.pos, mob.pos) < 150) {
                         lowestHealth.en = fri
-                        lowestHealth.health = friHealth
+                        lowestHealth.health= friHealth
                     }
                 }
             }
             if (lowestHealth.en && lowestHealth.health < 0.95) {
-                console.log("yay")
                 var dst = getDistance(lowestHealth.en.pos, mob.pos)
                 if (dst > 150) {
                     //lowestHealth.en.build.size += 0.05

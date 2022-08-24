@@ -27,7 +27,7 @@ function renderMobs() {
 }
 function clipSight(ctx) {
     var sightPath = new Path2D()
-    sightPath.arc(camera.x,camera.y, cameraTarget.build.sight, 0, Math.PI*2, false)
+    sightPath.arc(camera.x,camera.y, clamp(cameraTarget.build.sight,0,1000), 0, Math.PI*2, false)
 
     ctx.clip(sightPath)
 }
@@ -35,7 +35,7 @@ var globalScale = 1
 function renderLoop() {
     globalScale = globalScale = (()=>{
         var smallest = Math.min(window.innerWidth, window.innerHeight)
-        return (smallest/2)/cameraTarget.build.sight
+        return (smallest/2)/clamp(cameraTarget.build.sight,0,1000)
     })()
     let ctx = getCtx()
     ctx.save()

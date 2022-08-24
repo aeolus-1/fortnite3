@@ -18,6 +18,8 @@ class mob {
         this.build = testObjectForUndefined(build, buildDefaultProps);
 
         this.build.duration += randInt(-5, 5);
+        this.build.health *=3
+        this.build.maxHealth *=3
 
         for (let i = 0; i < this.build.guns.length; i++) {
             this.build.guns[i] = testObjectForUndefined(
@@ -35,6 +37,7 @@ class mob {
 
         this.bot = {
             active: this.build.bot,
+            retreat:true,
 
             movingDirection: 0,
             movingStrength: 0,
@@ -221,8 +224,8 @@ var Mob = {
                     mob.rotation +
                     (360 / mob.build.exploding.strength) * i * (Math.PI / 180);
                 var l = 5
-                tbullet.vel.x += (Math.cos(a) * mob.build.exploding.strength)+randInt(-l,l);
-                tbullet.vel.y += (Math.sin(a) * mob.build.exploding.strength)+randInt(-l,l);
+                tbullet.vel.x += (Math.cos(a) * mob.build.speed)+randInt(-l,l);
+                tbullet.vel.y += (Math.sin(a) * mob.build.speed)+randInt(-l,l);
             }
         }
     },
@@ -474,7 +477,9 @@ var Mob = {
 
 
                         var newPos = Bot.leadMovingTarget(mob.pos, en.pos, addedVel, gun.bullet.build.speed*deltaTime)
-
+                        if (newPos == undefined) {
+                            newPos = mob.pos
+                        }
                         var a = (getAngle(newPos,
                             v(
                                 mob.pos.x +
@@ -499,7 +504,7 @@ var Mob = {
         }
     },
     moveMobiles(mob, angle, strength) {
-        strength = clamp(strength, -1, 1); //*(mob.player?0.3:1)
+        strength = clamp(strength, -1, 1)*(mob.player?2:1)
 
         mob.vel.x += Math.cos(angle) * mob.build.speed * 0.2 * deltaTime * strength;
         mob.vel.y += Math.sin(angle) * mob.build.speed * 0.2 * deltaTime * strength;

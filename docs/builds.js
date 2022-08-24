@@ -680,7 +680,7 @@ var badBuilds = {
                     alive: true,
                     build: {
                         health: 45,
-                        speed: 1.3,
+                        speed: 10,
                         size: 9,
                         maxHealth: 85,
                         bodyDamage: 3,
@@ -728,7 +728,7 @@ var badBuilds = {
                     alive: true,
                     build: {
                         health: 45,
-                        speed: 1.3,
+                        speed: 10,
                         size: 9,
                         maxHealth: 85,
                         bodyDamage: 3,
@@ -3848,7 +3848,7 @@ var badBuilds = {
     },
     averageJake: {
         name: "averageJake",
-        health: 30,
+        health: 10,
         speed: 1.2,
         size: 9,
         invisDur: 300,
@@ -3861,7 +3861,7 @@ var badBuilds = {
         shape:7,
         guns: [],
         exploding: {
-            strength: 39,
+            strength: 45,
             bullet: {
                 pos: {
                     x: 0,
@@ -3879,10 +3879,10 @@ var badBuilds = {
                 alive: true,
                 build: {
                     health: 30,
-                    speed: 2,
+                    speed: 30,
                     size: 5,
                     maxHealth: 4,
-                    bodyDamage: 1.9,
+                    bodyDamage: 3,
                     duration: 100,
                     friction: 1,
                     baseValue: 0,
@@ -4277,7 +4277,7 @@ let motherShipHealDroneGun = {
         build: { 
             name: "motherShipHeals", 
             health: 35, 
-            speed: 0.35, 
+            speed: 0.8, 
             size: 9, 
             maxHealth: 100, 
             bodyDamage: 0.5, 
@@ -4335,16 +4335,16 @@ let motherShipHealDroneGun = {
 bossBuilds.mothership = {
     name: "mothership",
     boss: true,
-    health: 1900,
-    speed: 0.7,
+    health: 2300,
+    speed: 0.15,
     size: 60,
     shape: 8,
     maxHealth: 100,
     bodyDamage: 0.9,
     duration: Infinity,
     friction: 0.98,
-    sight: 1000,
-    range: 500,
+    sight: 100000,
+    range: 600,
     droneCap: 12,
     turningSpeed: 0.03,
     guns: [
